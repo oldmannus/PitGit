@@ -1,0 +1,50 @@
+﻿
+UI
+-------------
+Intro scene 
+	fill out
+Main scene
+	reattach save game system. Or implement in JLib
+	profile system. And/or implement in JLib
+	background art
+League view
+	Design functionality
+	Design UI
+
+
+
+Framework
+----------
+Build View Commands
+
+
+Match
+----------
+Action panel
+
+
+
+
+Actions
+--------------
+Inputs
+	- Combatant info		
+		Relevant stats
+		Skill in action
+		health/conditions
+		Keywords
+
+
+
+
+Features
+Crowd enthusiasm effecting play and pay
+Betting on teams
+
+
+
+Lighting
+---------------------------
+Scene tab
+	SkyBox
+	Sun

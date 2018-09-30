@@ -1,0 +1,11 @@
+NameId,DisplayName,Language,StrBase,StrDelta,QuickBase,QuickDelta,SizeBase,SizeDelta,KnowledgeBase,KnowledgeDelta,ToughBase,ToughDelta
+Orc,Orc,Common,45,10,50,10,55,10,50,10,50,10
+Troll,Troll,Common,75,10,50,10,70,10,50,10,50,10
+Human,Human,Common,35,10,50,10,50,10,50,10,50,10
+Elf,Elf,Common,30,10,50,10,47,10,50,10,50,10
+Dwarf,Dwarf,Common,40,10,50,10,40,10,50,10,50,10
+Gnome,Gnome,Common,20,10,50,10,20,10,50,10,50,10
+Goblin,Goblin,Common,35,10,50,10,20,10,50,10,50,10
+FDwarf,Fallen Dwarf,Common,35,10,50,10,20,10,50,10,50,10
+BGnome,Black Gnome,Common,25,10,50,10,20,10,50,10,50,10
+Skeleton,Skeleton,Common,50,10,50,10,20,10,50,10,50,10
