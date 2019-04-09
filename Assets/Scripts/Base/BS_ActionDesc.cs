@@ -9,11 +9,10 @@ using JLib.Utilities;
 namespace Pit
 {
     // is displayable, so we can see it on an icon bar and whatnot
-    public class BS_ActionDesc : IDisplayable
+    public class BS_ActionDesc : GM_Detailable
     {
         public int APRequired;
-        public string DisplayName;
-        public GM_DisplayInfo About { get; set; }
+    
     }
 
     public class BS_AttackActionDesc : BS_ActionDesc

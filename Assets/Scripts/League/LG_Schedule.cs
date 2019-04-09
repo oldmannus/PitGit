@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using JLib;
 using JLib.Utilities;
+using JLib.Game;
 
 namespace Pit
 {
@@ -19,11 +20,11 @@ namespace Pit
         public int NumDays;
 
 
-        static Predicate<BS_MatchParams> FindMatch(int team1, int team2, int round)
+        static Predicate<BS_MatchParams> FindMatch(GM_IDList teamIds, int round)
         {
             return delegate (BS_MatchParams param)
             {
-                return param.TeamIds[0] == team1 && param.TeamIds[1] == team2 && param.Day == round;
+                return param.TeamIds == teamIds && param.Day == round;
             };
         }
 
@@ -43,21 +44,29 @@ namespace Pit
 
             //            for (int round = 0; round < numRounds; round++)
             {
+
+                
+
                 // this generates a full set of each team playing every other team once. 
                 int[,] matchInfo = GenerateRoundRobin(numTeams);
                 NumDays = matchInfo.GetLength(1);
-                for (int team1 = 0; team1 < matchInfo.GetLength(0); team1++)
+                for (int teamIndex1 = 0; teamIndex1 < matchInfo.GetLength(0); teamIndex1++)
                 {
                     for (int round = 0; round < matchInfo.GetLength(1); round++)
                     {
-                        int team2 = matchInfo[team1, round];
-
-                        if (Matches.Find(FindMatch(team1, team2, round)) == null)
+                        BS_Team t1 = PT_Game.League.Teams[teamIndex1];
+                        BS_Team t2 = PT_Game.League.Teams[matchInfo[teamIndex1, round]];
+                        
+                        //TODO add support for multiple teams 
+                        GM_IDList idList = new GM_IDList();
+                        idList.Add(t1.Id);
+                        idList.Add(t2.Id);
+                        
+                        if (Matches.Find(FindMatch(idList, round)) == null)
                         {
                             BS_MatchParams match = new BS_MatchParams();
                             match.Day = round;
-                            match.TeamIds.Add(team1);
-                            match.TeamIds.Add(team2);
+                            match.TeamIds = idList;
                             Matches.Add(match);
                         }
                     }

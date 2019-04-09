@@ -8,6 +8,18 @@ namespace JLib.Unity
     {
         static bool AlertNulls = false;
 
+        public static void SetSelected(Selectable go)
+        {
+            if (AlertNulls)
+                Dbg.Assert(go != null);
+            if (go != null)
+            {
+                go.Select();
+                go.OnSelect(null);
+            }
+        }
+
+
         public static void SetInteractable(Selectable go, bool b )
         {
             if (AlertNulls)

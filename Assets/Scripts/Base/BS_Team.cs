@@ -9,27 +9,27 @@ using JLib.Utilities;
 
 namespace Pit
 {
+
+
     [Serializable]
-    public class BS_Team : IDisplayable
+    public class BS_Team : GM_Detailable, GM_IIdentifiable
     {
-        public Color            BaseColor;
-        public Color            AccentColor;
+        public Color BaseColor;
+        public Color AccentColor;
 
-        public GM_DisplayInfo   About { get; private set; }
-        public bool             IsAI { get; set; }
+        public bool IsAI;
 
-        public int              Wins { get; set; }   // this season;
-        public int              Losses { get; set; }   // this season;
+        public int Wins;   // this season;
+        public int Losses;// this season;
 
-        public int              CareerWins { get; set; }   // this season;
-        public int              CareerLosses { get; set; }   // this season;
+        public int CareerWins;
+        public int CareerLosses;
 
-        List<BS_Combatant>      AllTeamMembers = new List<BS_Combatant>();
-
+        List<BS_Combatant> AllTeamMembers = new List<BS_Combatant>();
+        public ulong Id { get; set; }
 
 
         const int RoughStartNumPlayers = 1;
-
 
 
         #region Initialization
@@ -38,8 +38,14 @@ namespace Pit
         public BS_Team()
         // ---------------------------------------------------------------------------------------
         {
-            About = new GM_DisplayInfo();
+            GM_Game.Finder.Register(this);
         }
+
+        ~BS_Team()
+        {
+            GM_Game.Finder.Unregister(this);
+        }
+
 
 
         // ---------------------------------------------------------------------------------------
@@ -73,7 +79,7 @@ namespace Pit
                     failedTries++;
                 }
             }
-            About.DisplayName = teamName;
+            DisplayName = teamName;
 
         }
         #endregion

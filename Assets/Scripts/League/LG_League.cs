@@ -105,8 +105,7 @@ namespace Pit
 
             Dbg.Log("Creating new League " + name + " teams " + numTeams + " budget " + startBudget);
             GM_Game.Popup.ShowPopup("Initializing League " + name, PopupHeaderText);
-            About = new GM_DisplayInfo();
-            About.DisplayName = name;
+            DisplayName = name;
             yield return null;
 
 
@@ -124,6 +123,9 @@ namespace Pit
                 {
                     team.IsAI = false;
                     teamName = "Your Team";
+                    PT_Game.UIPlayer.Team = team;
+                     
+
                 }
                 else
                 {

@@ -42,7 +42,7 @@ namespace Pit
                 }
             }
 
-            MT_Combatant c = PT_Game.Match.SelectedPCCombatant;
+            MT_Combatant c = PT_Game.UI.Match.SelectedPCCombatant;
             Dbg.Assert(c != null);
 
             if (c.IsOut == false)

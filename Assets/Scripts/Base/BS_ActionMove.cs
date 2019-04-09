@@ -23,7 +23,7 @@ namespace Pit
         {
             TargetType = Target.Point;
 
-            About.Icon = PT_Game.Data.Icons.GetIcon("Feet");
+            Icon = PT_Game.Data.Icons.GetIcon("Feet");
         }
 
 

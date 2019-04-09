@@ -22,11 +22,21 @@ namespace Pit
 
         private IEnumerator DoIt(BS_MatchParams info, BS_MatchResult result)
         {
-            BS_Team team1 = PT_Game.League.Teams[info.TeamIds[0]];
-            BS_Team team2 = PT_Game.League.Teams[info.TeamIds[1]];
+            string label = "";
+            foreach (var teamId in info.TeamIds)
+            {
+                BS_Team team = GM_Game.Finder.Get<BS_Team>(teamId);
+                if (label.Length == 0)
+                {
+                    label = "Team ";
+                }
+                else
+                    label += " vs ";
+                label += team.DisplayName;
+            }
+          
 
-
-            GM_Game.Popup.ShowPopup(string.Format("Team {0} versus Team {1}", team1.About.DisplayName, team2.About.DisplayName), "Simulating Match");
+            GM_Game.Popup.ShowPopup(label, "Simulating Match");
             for (int i = 0; i < 5; i++)
                 yield return null;
 
