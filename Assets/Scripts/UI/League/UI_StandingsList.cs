@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_StandingsList : MonoBehaviour {
+public class UI_StandingsList : UI_TabControlPage {
 
 	// Use this for initialization
 	void Start () {

@@ -273,10 +273,15 @@
     <Compile Include="Assets\Scripts\UI\Game\UI_IntroMgr.cs" />
     <Compile Include="Assets\Scripts\UI\Game\UI_MainMenu.cs" />
     <Compile Include="Assets\Scripts\UI\League\UI_LeagueMenu.cs" />
-    <Compile Include="Assets\Scripts\UI\League\UI_MatchPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\League\UI_LeagueMenuTabPage.cs" />
     <Compile Include="Assets\Scripts\UI\League\UI_MatchScheduleDay.cs" />
+    <Compile Include="Assets\Scripts\UI\League\UI_SchedulePage.cs" />
     <Compile Include="Assets\Scripts\UI\League\UI_StandingsList.cs" />
     <Compile Include="Assets\Scripts\UI\League\UI_StandingsListEntry.cs" />
+    <Compile Include="Assets\Scripts\UI\League\UI_StandingsPage.cs" />
+    <Compile Include="Assets\Scripts\UI\League\UI_StatisticsPage.cs" />
+    <Compile Include="Assets\Scripts\UI\League\UI_TeamIcon.cs" />
+    <Compile Include="Assets\Scripts\UI\League\UI_TeamsPage.cs" />
     <Compile Include="Assets\Scripts\UI\Match\UI_ActionInfo.cs" />
     <Compile Include="Assets\Scripts\UI\Match\UI_ActionListPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Match\UI_ActionListPanelEntry.cs" />
@@ -296,6 +301,8 @@
     <Compile Include="Assets\Scripts\UI\UI_PitUIMgr.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Popup - Backup.cs" />
     <Compile Include="Assets\Scripts\UI\UI_PopupInterface.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_TabControl.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_TabControlPage.cs" />
     <Compile Include="Assets\Scripts\UI\Utility\UI_Screen.cs" />
     <None Include="Assets\Common\JLib\JLibToDo.txt" />
     <None Include="Assets\Scripts\PitGame To Do.txt" />
