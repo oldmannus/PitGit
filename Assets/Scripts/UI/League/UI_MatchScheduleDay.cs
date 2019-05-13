@@ -10,36 +10,50 @@ using JLib.Unity;
  * This represents one day from the current team towards a given team
  * 
  */
-public class UI_MatchScheduleDay : Button
+public class UI_MatchScheduleDay : MonoBehaviour
 {
     [SerializeField]
-    List<GameObject> _teamIconObjects = new List<GameObject>();
+    Button _button = null;
+
+    [SerializeField]
+    GameObject _opposingTeamIcon = null;
+
+
+    [SerializeField]
+    GameObject _opposingTeamName = null;
 
 
     ///  internals
-    List<Sprite> _teamIcons = new List<Sprite>();
     BS_MatchParams _matchInfo;
+    Sprite _teamIconSprite;
 
-    protected override void Start()
+    protected void Start()
     {
-        foreach( var obj in _teamIconObjects)
-        {
-            _teamIcons.Add(obj.GetComponent<Sprite>());
-        }
+        _teamIconSprite = _opposingTeamIcon.GetComponent<Sprite>();
     }
-    public void SetMatchInfo(BS_MatchParams matchInfo)
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="viewedTeamId">Team whose schedule we're viewing</param>
+    /// <param name="matchInfo"></param>
+    public void SetMatchInfo(ulong viewedTeamId, BS_MatchParams matchInfo)
     {
-        int teamIdNdx = 0;
-        for (; teamIdNdx < _teamIcons.Count && teamIdNdx < matchInfo.TeamIds.Count; teamIdNdx++)
+        Dbg.Assert(matchInfo.TeamIds.Count == 2);
+        // find opposing team id
+        ulong opposingTeamId = JLib.Game.GM_ObjectFinder.InvalidId;
+        if (matchInfo.TeamIds[0] == viewedTeamId)
+            opposingTeamId = matchInfo.TeamIds[1];
+        else if (matchInfo.TeamIds[1] == viewedTeamId)
+            opposingTeamId = matchInfo.TeamIds[0];
+        else
         {
-            _teamIcons[teamIdNdx] = PT_Game.League.Teams[teamIdNdx].Icon;
-            UN.SetActive(_teamIconObjects[teamIdNdx], false);
-        }
-        for (; teamIdNdx < _teamIcons.Count; teamIdNdx++)
-        {
-            UN.SetActive(_teamIconObjects[teamIdNdx], false);
+            Dbg.Assert(false, "viewed team is not in match info");
         }
 
+        BS_Team opposingTeam = PT_Game.Finder.Get<BS_Team>(opposingTeamId);
+
+        _opposingTeamName.GetComponent<Text>().text = opposingTeam.DisplayName;
         _matchInfo = matchInfo;
     }
 

@@ -37,59 +37,82 @@ namespace Pit
             // TODO fix this numteam limitation
             Dbg.Assert((numTeams % 2) == 0);
 
-            //int curDay = 0;
-            //int curMatchesThisDay = 0;
-            //const int MaxNumMatchesPerDay = 4; // TODO Parameterize this
 
-
-            //            for (int round = 0; round < numRounds; round++)
+            for (int t1 = 0; t1 < numTeams; t1++)
             {
-
-                
-
-                // this generates a full set of each team playing every other team once. 
-                int[,] matchInfo = GenerateRoundRobin(numTeams);
-                NumDays = matchInfo.GetLength(1);
-                for (int teamIndex1 = 0; teamIndex1 < matchInfo.GetLength(0); teamIndex1++)
+                for (int t2 = t1 + 1; t2 < numTeams; t2++)
                 {
-                    for (int round = 0; round < matchInfo.GetLength(1); round++)
+                    BS_Team tm1 = PT_Game.League.Teams[t1];
+                    BS_Team tm2 = PT_Game.League.Teams[t2];
+
+                    GM_IDList idList = new GM_IDList();
+                    idList.Add(tm1.Id);
+                    idList.Add(tm2.Id);
+
+                    BS_MatchParams match = new BS_MatchParams();
+                    match.TeamIds = idList;
+                    match.Day = -1;
+                    bool found = false;
+                    for (int dayNdx = 0; dayNdx < numTeams; dayNdx++)
                     {
-                        BS_Team t1 = PT_Game.League.Teams[teamIndex1];
-                        BS_Team t2 = PT_Game.League.Teams[matchInfo[teamIndex1, round]];
-                        
-                        //TODO add support for multiple teams 
-                        GM_IDList idList = new GM_IDList();
-                        idList.Add(t1.Id);
-                        idList.Add(t2.Id);
-                        
-                        if (Matches.Find(FindMatch(idList, round)) == null)
+                        found = false;
+                        foreach (var m in Matches)
                         {
-                            BS_MatchParams match = new BS_MatchParams();
-                            match.Day = round;
-                            match.TeamIds = idList;
-                            Matches.Add(match);
+                            if (m.Day == dayNdx && (m.TeamIds.Contains(tm1.Id) || m.TeamIds.Contains(tm2.Id)))
+                            {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (found == false)
+                        {
+                            match.Day = dayNdx;
+                            break;
                         }
                     }
 
-                    //for (int matchNdx = 0; matchNdx < matchesThisRun; matchNdx++)
-                    //{
-                    //    if (curMatchesThisDay == MaxNumMatchesPerDay)
-                    //    {
-                    //        curMatchesThisDay = 0;
-                    //        curDay++;
-                    //    }
+                    Dbg.Assert(match.Day != -1);
 
-                    //    BS_MatchParams match = new BS_MatchParams();
-                    //    match.Day = curDay;
-                    //    match.TeamIds.Add(matchInfo[matchNdx, 0]);
-                    //    match.TeamIds.Add(matchInfo[matchNdx, 1]);
-                    //    Matches.Add(match);
-                    //}
+                    Matches.Add(match);
+
+
+                    Dbg.Log(t1 + " vs " + t2 + " day: " + match.Day);
                 }
-            }
 
+            }
             Matches.Sort((x, y) => { return (x.Day < y.Day) ? -1 : ((x.Day > y.Day) ? 1 : 0); });
 
+
+            /*
+
+        // this generates a full set of each team playing every other team once. 
+        int[,] matchInfo = GenerateRoundRobin(numTeams);
+        NumDays = matchInfo.GetLength(1);
+        for (int teamIndex1 = 0; teamIndex1 < matchInfo.GetLength(0); teamIndex1++)
+        {
+            for (int round = 0; round < matchInfo.GetLength(1); round++)
+            {
+                BS_Team t1 = PT_Game.League.Teams[teamIndex1];
+                BS_Team t2 = PT_Game.League.Teams[matchInfo[teamIndex1, round]];
+
+                //TODO add support for multiple teams 
+                GM_IDList idList = new GM_IDList();
+                idList.Add(t1.Id);
+                idList.Add(t2.Id);
+
+                if (Matches.Find(FindMatch(idList, round)) == null)
+                {
+                    BS_MatchParams match = new BS_MatchParams();
+                    match.Day = round;
+                    match.TeamIds = idList;
+
+                    Matches.Add(match);
+                }
+            }
+        }
+
+        Matches.Sort((x, y) => { return (x.Day < y.Day) ? -1 : ((x.Day > y.Day) ? 1 : 0); });
+*/
         }
 
 

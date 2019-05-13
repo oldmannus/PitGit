@@ -6,7 +6,8 @@ using JLib.Utilities;
 using Pit;
 using JLib.Game;
 
-
+// TODO : Advance to latest day in schedule
+// TODO : Input to change teams
 // TODO : scrolling schedule
 public class UI_SchedulePage : UI_TabControlPage
 {
@@ -61,16 +62,19 @@ public class UI_SchedulePage : UI_TabControlPage
         int numDays = PT_Game.League.Schedule.NumDays;
         for (int curDay = 0; curDay < numDays; curDay++)
         {
+            Dbg.Log("Cur Day: " + curDay);
             GameObject go = _dates.AddElement();
             for (; curTeamMatchNdx < teamMatches.Count; curTeamMatchNdx++)
             {
                 if (teamMatches[curTeamMatchNdx].Day == curDay )
                 {
                     UI_MatchScheduleDay entry = go.GetComponent<UI_MatchScheduleDay>();
-                    entry.SetMatchInfo(teamMatches[curTeamMatchNdx]);
+                    Dbg.Log(teamMatches[curTeamMatchNdx].TeamIds[0] + ":" + teamMatches[curTeamMatchNdx].TeamIds[1]);
+
+                    entry.SetMatchInfo(uiPlayerTeamID, teamMatches[curTeamMatchNdx]);
                 }
             }
-        }
+        }   
     }
 
     public void OnTimeAdvance()

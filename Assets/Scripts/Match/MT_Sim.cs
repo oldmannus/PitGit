@@ -230,10 +230,13 @@ namespace Pit
         {
             _teams = new List<MT_Team>();
 
-            foreach (int teamId in param.TeamIds)
+            foreach (var teamId in param.TeamIds)
             {
                 MT_Team ti = new MT_Team();
-                ti.Initialize(0, league.Teams[teamId], param);
+
+                // TO DO add syntactic sugar to get teams from league rather than finder
+               
+                ti.Initialize(0, PT_Game.Finder.Get<BS_Team>(teamId), param);
                 _teams.Add(ti);
             };
         }

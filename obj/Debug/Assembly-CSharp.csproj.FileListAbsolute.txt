@@ -1,0 +1,2 @@
+C:\Users\durdo\Documents\GitHub\PitGit\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\durdo\Documents\GitHub\PitGit\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache

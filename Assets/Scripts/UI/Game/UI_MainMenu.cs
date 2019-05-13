@@ -65,7 +65,7 @@ public class UI_MainMenu : UI_Screen
     {
 
         string Name = "MOOGL";
-        int numTeams = 16;
+        int numTeams = 4;
         int startBudget = 1000;
 
         PT_Game.CreateNewLeague(Name, numTeams, startBudget);

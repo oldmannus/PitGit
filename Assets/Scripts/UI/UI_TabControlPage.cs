@@ -25,7 +25,8 @@ public class UI_TabControlPage : MonoBehaviour
         Dbg.Assert(_owner == null);
         _owner = ctrl;
 
-        _selectBtn.onClick.AddListener(() => _owner.SelectPage(this));
+        var thisCapture = this;
+        _selectBtn.onClick.AddListener(() => _owner.SelectPage(thisCapture));
     }
 
     public void ActivatePage(int oldPageNdx)

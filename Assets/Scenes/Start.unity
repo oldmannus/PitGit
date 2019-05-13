@@ -1422,7 +1422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908da7bb31c00294e97dd9158d60d03c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPhase: 0
+  StartPhase: 3
 --- !u!114 &1602457311
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -114,7 +114,7 @@ namespace JLib.Game
     // ids through this
     public class GM_ObjectFinder
     {
-        const ulong InvalidId = 0;
+        public const ulong InvalidId = 0;
 
         Dictionary<ulong, GM_IIdentifiable> _map = new Dictionary<ulong, GM_IIdentifiable>();
         ulong _nextId = 1;

@@ -32,7 +32,13 @@ public class UI_TabControl : MonoBehaviour
     void Start()
     {
         if (_pages.Count > 0)
+        {
             _selectedIndex = 0;
+            foreach (var page in _pages)
+            {
+                page.SetTabControl(this);
+            }
+        }
     }
 
     private void OnEnable()
