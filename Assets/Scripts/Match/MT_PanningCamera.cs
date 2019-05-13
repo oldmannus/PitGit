@@ -128,9 +128,12 @@ namespace Pit
         {
             Vector3 offset = _gameCameraLookAtObj.transform.TransformDirection(Vector3.left) * panAmt;
             // ### TODO : add bounds
-
             Vector3 newPosition = _gameCameraLookAtObj.transform.position + offset;
             _gameCameraLookAtObj.transform.position = newPosition;
+
+            Dbg.Log("newPosition = " + newPosition);
+
+
         }
         void UpdatePanZ(float panAmt)
         {
