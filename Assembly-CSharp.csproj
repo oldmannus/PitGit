@@ -305,11 +305,11 @@
     <Compile Include="Assets\Scripts\UI\UI_TabControl.cs" />
     <Compile Include="Assets\Scripts\UI\UI_TabControlPage.cs" />
     <Compile Include="Assets\Scripts\UI\Utility\UI_Screen.cs" />
-    <None Include="Assets\Content\Projectors\Guidelines.txt" />
+    <None Include="Assets\Content\Environment\Projectors\Guidelines.txt" />
     <None Include="Assets\Common\JLib\JLibToDo.txt" />
     <None Include="Assets\Scripts\PitGame To Do.txt" />
-    <None Include="Assets\Content\Projectors\Shaders\ProjectorLight.shader" />
-    <None Include="Assets\Content\Projectors\Shaders\ProjectorMultiply.shader" />
+    <None Include="Assets\Content\Environment\Projectors\Shaders\ProjectorLight.shader" />
+    <None Include="Assets\Content\Environment\Projectors\Shaders\ProjectorMultiply.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/durdo/Documents/GitHub/PitGit/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

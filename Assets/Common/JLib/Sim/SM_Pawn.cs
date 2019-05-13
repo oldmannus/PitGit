@@ -74,8 +74,16 @@ namespace JLib.Sim
             _mover.Initialize(this, _speed, _turnSpeed);
 
             _nma = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
+            Dbg.Assert(_nma != null, "Pawn requires nav mesh agent, but probably shouldn't"); // TO DO remove dependency
+
             _charControl = GetComponent<CharacterController>();
+            Dbg.Assert(_charControl != null, "Pawn requires CharacterController");
+
             _animationMgr = GetComponentInChildren<SM_PawnAnimMgr>(true);
+            Dbg.Assert(_animationMgr != null, "Pawn requires SM_PawnAnimMgr");
+
+
+
             _animationMgr.SetPawn(this);
         }
 

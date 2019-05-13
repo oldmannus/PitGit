@@ -61,7 +61,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 7fe4289e43589354b8ddff08878d3e4d, type: 2}
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -222,6 +222,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: arena
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e04e4bed3dbdb1e419d8be0015db682e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e04e4bed3dbdb1e419d8be0015db682e, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
@@ -249,6 +253,18 @@ PrefabInstance:
     - target: {fileID: 400000, guid: e04e4bed3dbdb1e419d8be0015db682e, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: e04e4bed3dbdb1e419d8be0015db682e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: e04e4bed3dbdb1e419d8be0015db682e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: e04e4bed3dbdb1e419d8be0015db682e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e04e4bed3dbdb1e419d8be0015db682e, type: 3}
@@ -583,7 +599,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655785417}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.001989, y: -13.87, z: 9.19}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 854556331}
