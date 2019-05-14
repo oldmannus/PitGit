@@ -12,13 +12,11 @@ namespace Pit
 {
 
     // this is an action that sits on the player list of actions that they can take. 
-    public abstract class BS_Action
+    public abstract class BS_Action : GM_Detailable
     {
-        public BS_ActionDesc Desc { get; private set; }
         public BS_Combatant BaseCombatant { get; private set; }
         public MT_Combatant Combatant { get; private set; }
-        public GM_DisplayInfo About { get; private set; } 
-
+  
         public enum Status
         {
             Available,      // active button, ready to do something
@@ -49,7 +47,6 @@ namespace Pit
 
         public BS_Action()
         {
-            About = new GM_DisplayInfo();
         }
 
         public virtual void Reset()

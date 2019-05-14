@@ -105,8 +105,7 @@ namespace Pit
 
             Dbg.Log("Creating new League " + name + " teams " + numTeams + " budget " + startBudget);
             GM_Game.Popup.ShowPopup("Initializing League " + name, PopupHeaderText);
-            About = new GM_DisplayInfo();
-            About.DisplayName = name;
+            DisplayName = name;
             yield return null;
 
 
@@ -124,6 +123,9 @@ namespace Pit
                 {
                     team.IsAI = false;
                     teamName = "Your Team";
+                    PT_Game.UIPlayer.Team = team;
+                     
+
                 }
                 else
                 {
@@ -203,16 +205,14 @@ namespace Pit
         bool IsToBeViewed(BS_MatchParams match)
         // ----------------------------------------------------------------------------------
         {
-            //for(int i = 0; i < match.TeamIds.Count; i++)
-            //{
-            //    if (!Teams[match.TeamIds[i]].IsAI)
-            //        return true;
-            //}
-            //return false;
-
-            // TODO Reimplement PC-played games
+            for (int i = 0; i < match.TeamIds.Count; i++)
+            {
+                if (PT_Game.Finder.Get<BS_Team>(match.TeamIds[i]).IsAI)
+                {
+                    return true;
+                }
+            }
             return false;
-
         }
  
 
@@ -221,7 +221,8 @@ namespace Pit
             Dbg.Log("Initializing Arenas");
 
             LG_ArenaDescriptor arenaDesc = new LG_ArenaDescriptor();
-            arenaDesc.Name = "Arena2";
+     //       arenaDesc.Name = "Arena2";  // TO DO fix arena selection
+            arenaDesc.Name = "Arena3";
             _arenas.Add(arenaDesc);
         }
     }

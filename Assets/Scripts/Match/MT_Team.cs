@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using JLib.Utilities;
+using JLib.Game;
 
 namespace Pit
 {
-    public class MT_Team
+    public class MT_Team : GM_IIdentifiable
     {
-        public int TeamNdx { get; private set; }    // used for finding stuff like which spawn point to use. Should be 0 to num teams in match - 1
+        public int TeamNdx; // which team are we in order of first to last team
+        public ulong Id { get { return Team.Id; } set { Team.Id = value; } }
         public int Score;
         public BS_Team Team;
         public List<MT_Combatant> Combatants { get; private set; }    // base combatants only carried over from match
-
-
-
-
+        
         // ---------------------------------------------------------------------------------------
         /// <summary>
         /// Create pawns for each combatant and place them in the world

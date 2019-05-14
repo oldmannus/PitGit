@@ -13,7 +13,7 @@ namespace Pit
 {
     public class MT_Sim : SM_Sim
     {
-      
+
         enum State
         {
             Idle,
@@ -23,43 +23,23 @@ namespace Pit
         }
 
         // sim data
-        BS_MatchParams      _matchInfo = null;
-        BS_MatchResult      _matchResult;
-        MT_Arena            _arena;
-        State               _matchState = State.Idle;
-        LG_ArenaDescriptor  _arenaDesc;
-        List<MT_Team>       _teams = new List<MT_Team>();
-        MT_Team             _playerTeam;        // team used by the human at the local station
-        MT_MatchSimulator   _matchSimulator;
-        int                 _currentTeamNdx;    // the team whose turn it is
-        UI_WidgetMgr        _widgetMgr;
-        int                 _currentCmbtNdx = 0;    // current combatant in the current team
+        BS_MatchParams _matchInfo = null;
+        BS_MatchResult _matchResult;
+        MT_Arena _arena;
+        State _matchState = State.Idle;
+        LG_ArenaDescriptor _arenaDesc;
+        List<MT_Team> _teams = new List<MT_Team>();
+        MT_MatchSimulator _matchSimulator;
+        int _currentTeamNdx;    // the team whose turn it is
+        UI_WidgetMgr _widgetMgr;
 
         // syntactic sugar
-        public MT_Team PlayerTeam       { get { return _playerTeam; } }
-        public MT_Team CurrentTeam      { get { return _teams[_currentTeamNdx]; } }
-        public MT_Arena  Arena          { get { return _arena; } }
-        public BS_MatchResult Result    { get { return _matchResult; } }
-        public UI_WidgetMgr Widgets     {  get { return _widgetMgr; } }
-        
+        public MT_Team CurrentTeam { get { return _teams[_currentTeamNdx]; } }
+        public MT_Arena Arena { get { return _arena; } }
+        public BS_MatchResult Result { get { return _matchResult; } }
+        public UI_WidgetMgr Widgets { get { return _widgetMgr; } }
         public MT_PanningCamera MainCamera { get { return PT_Game.Cameras.FirstMainCamera() as MT_PanningCamera; } }
 
-
-        public MT_Combatant SelectedPCCombatant
-        {
-            get
-            {
-                return PlayerTeam.Combatants[_currentCmbtNdx];
-                //SM_Pawn p = PT_Game.Sim.SelectionMgr.GetFirstSelected() as SM_Pawn;
-                //if (p && p.GameParent is MT_Combatant)
-                //{
-                //    MT_Combatant c = p.GameParent as MT_Combatant;
-                //    if (c.Team == PT_Game.Match.PlayerTeam) // probably should always be true, but just checking
-                //        return c;
-                //}
-                //return null;
-            }
-        }
 
 
 
@@ -235,7 +215,9 @@ namespace Pit
         void StartSimulatedMatch(BS_MatchParams info )
         // -------------------------------------------------------------------------------
         {
-            Dbg.Log("Starting simulating match between " + info.TeamIds[0] + " " + info.TeamIds[1]);
+           // TODO: Implement simulated matches
+
+           // Dbg.Log("Starting simulating match between " + info.HomeTeamId + " " + info.AwayTeamId);
             // TODO: loop through teams
            
 //            _matchState = State.Exiting;
@@ -248,17 +230,16 @@ namespace Pit
         {
             _teams = new List<MT_Team>();
 
-            for (int i = 0; i < param.TeamIds.Count; i++)
+            for (int teamNdx = 0; teamNdx < param.TeamIds.Count; teamNdx++)
             {
+                var teamId = param.TeamIds[teamNdx];
                 MT_Team ti = new MT_Team();
-                ti.Initialize(i, league.Teams[param.TeamIds[i]], param);
-                _teams.Add(ti);
 
-                if (ti.Team.IsAI == false)
-                {
-                    _playerTeam = ti;
-                }
-            }
+                // TO DO add syntactic sugar to get teams from league rather than finder
+               
+                ti.Initialize(teamNdx, PT_Game.Finder.Get<BS_Team>(teamId), param);
+                _teams.Add(ti);
+            };
         }
 
 
@@ -325,7 +306,6 @@ namespace Pit
             _arenaDesc = null;
             _matchState = State.Idle;
             _teams = null;
-            _playerTeam = null;
         }
 
 

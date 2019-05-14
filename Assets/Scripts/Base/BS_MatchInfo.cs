@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using JLib;
 using JLib.Utilities;
+using JLib.Game;
 
 namespace Pit
 {
@@ -40,14 +41,12 @@ namespace Pit
         public BS_MatchResult Result;
     }
 
-
     /// <summary>
     /// Defines a match, either before or after
     /// </summary>
     public class BS_MatchParams
     {
-        // used for calendar stuff
-        public List<int> TeamIds = new List<int>();
+        public GM_IDList TeamIds = new GM_IDList();
         public int Day;
         public int ArenaNdx;
     }

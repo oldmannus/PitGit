@@ -7,9 +7,10 @@ using JLib.Game;
 
 namespace Pit
 {
+    [Serializable]
     public class PT_Player : JLib.Game.GM_Player
     {
-
-
+        public ulong TeamId; 
+        public BS_Team Team;
     }
 }

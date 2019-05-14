@@ -45,6 +45,7 @@ namespace Pit
         public void PlaceInArena(MT_ArenaSpawnPoint sp, Transform attachPt)
         {
             GameObject go = GM_Game.Resources.InstantiateFromResource(Base.VisualPrefabName, attachPt, sp.transform.position, sp.transform.rotation);
+            Dbg.Assert(go != null, "ERROR: Failed to instantiate from resource: " + Base.VisualPrefabName);
 
             _pawn = go.GetComponent<SM_Pawn>();
             if (Dbg.Assert(_pawn != null, "DATA ERROR: Loaded prefab has no pawn component attached: " + Base.VisualPrefabName))
@@ -53,6 +54,7 @@ namespace Pit
             _pawn.SetName(Base.FullName);
             _pawn.SetGameParent(this);
 
+            // TO DO remove selection projector connecting in combatant.
 
             GameObject proj = GM_Game.Resources.InstantiateFromResource("CharacterModels/SelectionProjector", go.transform, Vector3.zero, Quaternion.identity);
             proj.transform.localPosition = Vector3.zero;

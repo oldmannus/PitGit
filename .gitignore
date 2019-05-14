@@ -1,0 +1,10 @@
+Library
+Logs
+obj
+obj/Debug
+*.csproj
+*.sln
+.vs
+.vs/PitGit
+.vs/PitGit/v15
+Temp

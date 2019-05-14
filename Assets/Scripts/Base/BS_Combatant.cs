@@ -77,18 +77,19 @@ namespace Pit
         // ----------------------------------------------------------------------------------------------------
         {
             string[] models = new string[]
-            {
-                "CharacterModels/DarkSkeleton"
-                ,"CharacterModels/Cyclops"
-                ,"CharacterModels/Golem"
-                ,"CharacterModels/Scarecrow"
-                ,"CharacterModels/Goblin"
-                ,"CharacterModels/Goblin2"
-                ,"CharacterModels/Goblin3"
-                ,"CharacterModels/Troll"
-                ,"CharacterModels/Knight"
-                ,"CharacterModels/Trog"
-                ,"CharacterModels/HumanFemale"
+            {  // TO DO fix hard coded model selection
+                "Character/LowPoly_Lancer/Lancer"
+                //"CharacterModels/DarkSkeleton"
+                //,"CharacterModels/Cyclops"
+                //,"CharacterModels/Golem"
+                //,"CharacterModels/Scarecrow"
+                //,"CharacterModels/Goblin"
+                //,"CharacterModels/Goblin2"
+                //,"CharacterModels/Goblin3"
+                //,"CharacterModels/Troll"
+                //,"CharacterModels/Knight"
+                //,"CharacterModels/Trog"
+                //,"CharacterModels/HumanFemale"
             };
 
             VisualPrefabName = Rng.RandomArrayElement<string>(models);

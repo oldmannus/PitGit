@@ -13,18 +13,41 @@ namespace JLib.Unity
         [SerializeField]
         GameObject _template = null;
 
+        [SerializeField]
+        bool _clip = true;
+
+        [SerializeField]
+        RectTransform _boxFrame = null;
+
+
         List<GameObject> _activeElements = new List<GameObject>();
         List<GameObject> _inactiveElements = new List<GameObject>();
 
         public GameObject this[int ndx] { get { return _activeElements[ndx]; } }
+
+        int _maxElementsInFrame = 0;
+        int _curNdx = 0;
 
         private void Start()
         {
             _activeElements = new List<GameObject>();
             _inactiveElements = new List<GameObject>();
             Dbg.Assert(_template != null);
+            _template.SetActive(false);
+        }
 
-            AddToInactiveList(_template);
+        void RecomputeNumElements(bool force = false)
+        {
+            if (force || _maxElementsInFrame == 0)
+            {
+                RectTransform templateHeight = _template.GetComponent<RectTransform>();
+                Dbg.Assert(templateHeight != null);
+
+                float theight = templateHeight.rect.height;
+                float fullHeight = _boxFrame.rect.height;
+
+                _maxElementsInFrame = (int)(fullHeight / theight);
+            }
         }
 
 
@@ -54,6 +77,8 @@ namespace JLib.Unity
 
         public GameObject AddElement()
         {
+            RecomputeNumElements();
+
             GameObject go = null;
             if (_inactiveElements.Count > 0)
             {
@@ -66,7 +91,10 @@ namespace JLib.Unity
             }
 
             Dbg.Assert(go != null);
+            go.SetActive(_activeElements.Count() < _curNdx + _maxElementsInFrame);
+  
             _activeElements.Add(go);
+            
             return go;
         }
     }
