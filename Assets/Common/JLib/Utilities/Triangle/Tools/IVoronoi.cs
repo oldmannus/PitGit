@@ -10,7 +10,7 @@ namespace JLib.Utilities.Triangle.Tools
     using JLib.Utilities.Triangle.Geometry;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// : Update summary.
     /// </summary>
     public interface IVoronoi
     {

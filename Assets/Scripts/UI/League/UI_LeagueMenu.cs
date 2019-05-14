@@ -38,7 +38,7 @@ public class UI_LeagueMenu : PT_MonoBehaviour
 
     public void OnNextMatch()
     {
-        PT_Game.League.PlayTillSeenGame();     // TO DO fix ui here
+        PT_Game.League.PlayTillSeenGame();     // TODO fix ui here
     }
 
     // Update is called once per frame

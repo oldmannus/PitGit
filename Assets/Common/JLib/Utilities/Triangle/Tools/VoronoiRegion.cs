@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="VoronoiRegion.cs" company="">
-// TODO: Update copyright text.
+// : Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
 

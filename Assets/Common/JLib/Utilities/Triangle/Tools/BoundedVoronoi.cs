@@ -88,7 +88,7 @@ namespace JLib.Utilities.Triangle.Tools
 
             foreach (var v in mesh.vertices.Values)
             {
-                // TODO: Need a reliable way to check if a vertex is on a segment
+                // : Need a reliable way to check if a vertex is on a segment
                 if (v.type == VertexType.FreeVertex || v.Boundary == 0)
                 {
                     ConstructBvdCell(v);

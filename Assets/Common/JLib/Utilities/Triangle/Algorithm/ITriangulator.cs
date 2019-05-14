@@ -11,9 +11,6 @@ namespace JLib.Utilities.Triangle.Algorithm
     using System.Linq;
     using System.Text;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public interface ITriangulator
     {
         int Triangulate(Mesh mesh);

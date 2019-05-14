@@ -231,7 +231,7 @@ namespace JLib.Utilities.Triangle.Algorithm
             int divider;
 
             divider = arraysize >> 1;
-            //divider += left; // TODO: check
+            //divider += left; // : check
             if (arraysize <= 3)
             {
                 // Recursive base case:  subsets of two or three vertices will be
@@ -841,7 +841,6 @@ namespace JLib.Utilities.Triangle.Algorithm
             //DebugWriter.Session.Start("test-dbg");
 
             // Allocate an array of pointers to vertices for sorting.
-            // TODO: use ToArray
             this.sortarray = new Vertex[m.invertices];
             i = 0;
             foreach (var v in m.vertices.Values)

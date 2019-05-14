@@ -80,7 +80,6 @@ namespace JLib.Utilities.Triangle.Tools
         /// <returns>True, if point is inside or on the edge of this triangle.</returns>
         internal static bool IsPointInTriangle(Point p, Point t0, Point t1, Point t2)
         {
-            // TODO: no need to create new Point instances here
             Point d0 = new Point(t1.X - t0.X, t1.Y - t0.Y);
             Point d1 = new Point(t2.X - t0.X, t2.Y - t0.Y);
             Point d2 = new Point(p.X - t0.X, p.Y - t0.Y);

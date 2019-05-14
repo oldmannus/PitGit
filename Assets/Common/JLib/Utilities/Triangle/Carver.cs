@@ -130,7 +130,6 @@ namespace JLib.Utilities.Triangle
                 // to subsegments, setting it to an illegal value.  Hence, we have to
                 // temporarily uninfect this triangle so that we can examine its
                 // adjacent subsegments.
-                // TODO: Not true in the C# version (so we could skip this).
                 testtri.Uninfect();
 
                 // Check each of the triangle's three neighbors.

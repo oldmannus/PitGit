@@ -235,7 +235,7 @@ namespace Pit
                 var teamId = param.TeamIds[teamNdx];
                 MT_Team ti = new MT_Team();
 
-                // TO DO add syntactic sugar to get teams from league rather than finder
+                // TODO add syntactic sugar to get teams from league rather than finder
                
                 ti.Initialize(teamNdx, PT_Game.Finder.Get<BS_Team>(teamId), param);
                 _teams.Add(ti);
@@ -421,8 +421,7 @@ namespace Pit
         //        return a.CurInitiative > b.CurInitiative ? 1 : (a.CurInitiative < b.CurInitiative ? -1 : 0);
         //    });
         //}
-
-        // TODO: switch from 2 team limit
+     
 
 
 

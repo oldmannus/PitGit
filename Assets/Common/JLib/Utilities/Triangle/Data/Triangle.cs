@@ -45,7 +45,7 @@ namespace JLib.Utilities.Triangle.Data
             // Three NULL vertices.
             vertices = new Vertex[3];
 
-            // TODO: if (Behavior.UseSegments)
+            // : if (Behavior.UseSegments)
             {
                 // Initialize the three adjoining subsegments to be the
                 // omnipresent subsegment.
@@ -55,7 +55,7 @@ namespace JLib.Utilities.Triangle.Data
                 subsegs[2].seg = Mesh.dummysub;
             }
 
-            // TODO:
+            // :
             //if (Behavior.VarArea)
             //{
             //    area = -1.0;
@@ -93,7 +93,7 @@ namespace JLib.Utilities.Triangle.Data
         /// </summary>
         public Vertex GetVertex(int index)
         {
-            return this.vertices[index]; // TODO: Check range?
+            return this.vertices[index]; // : Check range?
         }
 
         /// <summary>

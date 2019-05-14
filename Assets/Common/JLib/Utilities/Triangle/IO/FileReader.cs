@@ -373,7 +373,7 @@ namespace JLib.Utilities.Triangle.IO
                         throw new Exception("Segment has no endpoints.");
                     }
 
-                    // TODO: startIndex ok?
+                    // : startIndex ok?
                     end1 = int.Parse(line[1]) - startIndex;
                     end2 = int.Parse(line[2]) - startIndex;
                     mark = 0;
@@ -541,7 +541,7 @@ namespace JLib.Utilities.Triangle.IO
                         throw new Exception("Triangle has no nodes.");
                     }
 
-                    // TODO: startIndex ok?
+                    // : startIndex ok?
                     tri = new InputTriangle(
                         int.Parse(line[1]) - startIndex,
                         int.Parse(line[2]) - startIndex,
@@ -672,7 +672,7 @@ namespace JLib.Utilities.Triangle.IO
                         throw new Exception("Segment has no endpoints.");
                     }
 
-                    // TODO: startIndex ok?
+                    // : startIndex ok?
                     end1 = int.Parse(line[1]) - startIndex;
                     end2 = int.Parse(line[2]) - startIndex;
                     mark = 0;

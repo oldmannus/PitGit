@@ -62,7 +62,7 @@ namespace JLib.Utilities.Triangle.IO
         /// </summary>
         public Vertex GetVertex(int index)
         {
-            return null; // TODO: throw NotSupportedException?
+            return null; // : throw NotSupportedException?
         }
 
         public bool SupportsNeighbors

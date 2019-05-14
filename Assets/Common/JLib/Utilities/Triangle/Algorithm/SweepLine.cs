@@ -365,7 +365,7 @@ namespace JLib.Utilities.Triangle.Algorithm
             double ccwabc;
             double xac, yac, xbc, ybc;
             double aclen2, bclen2;
-            Point searchpoint = new Point(); // TODO: mesh.nextras
+            Point searchpoint = new Point(); // : mesh.nextras
             Otri dummytri = default(Otri);
 
             ccwabc = Primitives.CounterClockwise(pa, pb, pc);

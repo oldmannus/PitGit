@@ -84,7 +84,7 @@ namespace JLib.Utilities.Triangle.Data
         /// </summary>
         public Vertex GetVertex(int index)
         {
-            return this.vertices[index]; // TODO: Check range?
+            return this.vertices[index]; // : Check range?
         }
 
         /// <summary>

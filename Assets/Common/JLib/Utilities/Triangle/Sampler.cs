@@ -56,7 +56,7 @@ namespace JLib.Utilities.Triangle
         {
             int count = mesh.triangles.Count;
 
-            // TODO: Is checking the triangle count a good way to monitor mesh changes?
+            // : Is checking the triangle count a good way to monitor mesh changes?
             if (triangleCount != count || forceUpdate)
             {
                 triangleCount = count;
@@ -70,7 +70,6 @@ namespace JLib.Utilities.Triangle
                     samples++;
                 }
 
-                // TODO: Is there a way not calling ToArray()?
                 keys = mesh.triangles.Keys.ToArray();
             }
         }
@@ -81,7 +80,6 @@ namespace JLib.Utilities.Triangle
         /// <returns>Array of triangle keys.</returns>
         public int[] GetSamples(Mesh mesh)
         {
-            // TODO: Using currKeys to check key availability?
             List<int> randSamples = new List<int>(samples);
 
             int range = triangleCount / samples;

@@ -83,7 +83,6 @@ namespace JLib.Utilities.Triangle.IO
                     // If numbering is not linear, a simple 'foreach' traversal of the dictionary
                     // values doesn't reflect the actual numbering. Use an array instead.
 
-                    // TODO: Could use a custom sorting function on dictionary values instead.
                     Vertex[] nodes = new Vertex[mesh.vertices.Count];
 
                     foreach (var node in mesh.vertices.Values)
@@ -431,7 +430,7 @@ namespace JLib.Utilities.Triangle.IO
                     for (int i = 0; i < mesh.nextras; i++)
                     {
                         writer.Write(" 0");
-                        // TODO
+                        // 
                         // Interpolate the vertex attributes at the circumcenter.
                         //writer.Write(" {0}", torg.attribs[i] + xi * (tdes.attribst[i] - torg.attribs[i]) + 
                         //    eta * (tapex.attribs[i] - torg.attribs[i]));

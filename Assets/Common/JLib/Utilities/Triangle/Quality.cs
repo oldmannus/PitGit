@@ -842,7 +842,7 @@ namespace JLib.Utilities.Triangle
 
                 // Using the original (simpler) Steiner point location method
                 // for mesh refinement.
-                // TODO: NewLocation doesn't work for refinement. Why? Maybe 
+                // : NewLocation doesn't work for refinement. Why? Maybe 
                 // reset VertexType?
                 if (behavior.fixedArea || behavior.VarArea)
                 {
@@ -959,7 +959,7 @@ namespace JLib.Utilities.Triangle
             // Next, we worry about enforcing triangle quality.
             if ((behavior.MinAngle > 0.0) || behavior.VarArea || behavior.fixedArea || behavior.Usertest)
             {
-                // TODO: Reset queue? (Or is it always empty at this point)
+                // : Reset queue? (Or is it always empty at this point)
 
                 // Test all triangles to see if they're bad.
                 TallyFaces();

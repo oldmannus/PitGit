@@ -136,7 +136,7 @@ namespace JLib.Utilities.Triangle.IO
                 // Read the triangle's attributes.
                 tri.triangle.region = triangles[i].Region;
 
-                // TODO: VarArea
+                // : VarArea
                 if (mesh.behavior.VarArea)
                 {
                     tri.triangle.area = triangles[i].Area;

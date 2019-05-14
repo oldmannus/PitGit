@@ -271,7 +271,7 @@ namespace JLib.Utilities.Triangle
                     largestAngleCorner = torg;
                     break;
                 case 321: 	// assign necessary information
-                default: // TODO: is this safe?
+                default:
                     /// smallest angle corner: apex
                     /// largest angle corner: dest
                     xShortestEdge = xdo; yShortestEdge = ydo;
@@ -984,7 +984,7 @@ namespace JLib.Utilities.Triangle
                     largestAngleCorner = torg;
                     break;
                 case 321: 	// assign necessary information
-                default: // TODO: is this safe?
+                default: // : is this safe?
                     /// smallest angle corner: apex
                     /// largest angle corner: dest
                     xShortestEdge = xdo; yShortestEdge = ydo;

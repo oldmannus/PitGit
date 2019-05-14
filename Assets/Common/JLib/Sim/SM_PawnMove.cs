@@ -101,7 +101,6 @@ namespace JLib.Sim
             lookPos = _destinationPt - _pawn.transform.position;
             lookPos.y = 0;
 
-            // TODO: How to handle 'close enough'
             if (lookPos.sqrMagnitude < 0.2f)
             {
                 _velocity = Vector3.zero;

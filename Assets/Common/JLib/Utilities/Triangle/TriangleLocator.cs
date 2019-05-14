@@ -10,9 +10,6 @@ namespace JLib.Utilities.Triangle
     using JLib.Utilities.Triangle.Data;
     using JLib.Utilities.Triangle.Geometry;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     class TriangleLocator
     {
         Sampler sampler;
@@ -283,7 +280,6 @@ namespace JLib.Utilities.Triangle
                 }
             }
 
-            // TODO: Improve sampling.
             sampler.Update(mesh);
             int[] samples = sampler.GetSamples(mesh);
 

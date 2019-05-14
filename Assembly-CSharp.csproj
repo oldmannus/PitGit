@@ -240,6 +240,7 @@
     <Compile Include="Assets\Scripts\Game\PT_GamePhaseMatch.cs" />
     <Compile Include="Assets\Scripts\Game\PT_GamePhaseStart.cs" />
     <Compile Include="Assets\Scripts\Game\PT_MonoBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Game\PT_Phase.cs" />
     <Compile Include="Assets\Scripts\Game\PT_PhaseMgr.cs" />
     <Compile Include="Assets\Scripts\Game\PT_Player.cs" />
     <Compile Include="Assets\Scripts\Game\PT_Profile.cs" />

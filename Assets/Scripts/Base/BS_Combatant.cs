@@ -77,7 +77,7 @@ namespace Pit
         // ----------------------------------------------------------------------------------------------------
         {
             string[] models = new string[]
-            {  // TO DO fix hard coded model selection
+            {  
                 "Character/LowPoly_Lancer/Lancer"
                 //"CharacterModels/DarkSkeleton"
                 //,"CharacterModels/Cyclops"

@@ -54,7 +54,7 @@ namespace Pit
             _pawn.SetName(Base.FullName);
             _pawn.SetGameParent(this);
 
-            // TO DO remove selection projector connecting in combatant.
+            // TODO remove selection projector connecting in combatant.
 
             GameObject proj = GM_Game.Resources.InstantiateFromResource("CharacterModels/SelectionProjector", go.transform, Vector3.zero, Quaternion.identity);
             proj.transform.localPosition = Vector3.zero;

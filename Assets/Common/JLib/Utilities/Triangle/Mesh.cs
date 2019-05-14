@@ -32,7 +32,7 @@ namespace JLib.Utilities.Triangle
         // Stack that maintains a list of recently flipped triangles.
         Stack<Otri> flipstack;
 
-        // TODO: Check if custom hashmap implementation could be faster.
+        // : Check if custom hashmap implementation could be faster.
 
         // Using hashsets for memory management should quite fast.
         internal Dictionary<int, Triangle> triangles;
@@ -259,7 +259,7 @@ namespace JLib.Utilities.Triangle
             //    behavior.VarArea = true;
             //}
 
-            // TODO: remove
+            // : remove
             if (!behavior.Poly)
             {
                 // Be careful not to allocate space for element area constraints that
@@ -309,7 +309,7 @@ namespace JLib.Utilities.Triangle
             //    behavior.UseBoundaryMarkers = true;
             //}
 
-            // TODO: remove
+            // : remove
             if (!behavior.Poly)
             {
                 // Be careful not to allocate space for element area constraints that
@@ -370,7 +370,7 @@ namespace JLib.Utilities.Triangle
                 // or area constraints. The following are set to zero to avoid
                 // an accidental free() later.
                 //
-                // TODO: -
+                // : -
                 holes.Clear();
                 regions.Clear();
             }
@@ -439,7 +439,7 @@ namespace JLib.Utilities.Triangle
             inelements = triangles.Count;
             invertices = vertices.Count;
 
-            // TODO: Set all vertex types to input (i.e. NOT free)?
+            // : Set all vertex types to input (i.e. NOT free)?
 
             if (behavior.Poly)
             {
@@ -468,7 +468,7 @@ namespace JLib.Utilities.Triangle
                 checksegments = true;
             }
 
-            // TODO
+            // 
             //holes.Clear();
             //regions.Clear();
 
@@ -1302,7 +1302,7 @@ namespace JLib.Utilities.Triangle
                             top.SetApex(leftvertex);
 
                             // Assign region.
-                            // TODO: check region ok (no Math.Min necessary)
+                            // : check region ok (no Math.Min necessary)
                             region = Math.Min(top.triangle.region, horiz.triangle.region);
                             top.triangle.region = region;
                             horiz.triangle.region = region;
@@ -2695,7 +2695,7 @@ namespace JLib.Utilities.Triangle
                     }
                     else
                     {
-                        // TODO: Is using the vertex ID reliable???
+                        // : Is using the vertex ID reliable???
                         // It should be. The ID gets appropriately set in TransferNodes().
 
                         // Find the vertices numbered 'end1' and 'end2'.

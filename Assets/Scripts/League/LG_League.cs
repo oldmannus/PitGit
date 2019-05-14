@@ -221,7 +221,7 @@ namespace Pit
             Dbg.Log("Initializing Arenas");
 
             LG_ArenaDescriptor arenaDesc = new LG_ArenaDescriptor();
-     //       arenaDesc.Name = "Arena2";  // TO DO fix arena selection
+     //       arenaDesc.Name = "Arena2";  // TODO fix arena selection
             arenaDesc.Name = "Arena3";
             _arenas.Add(arenaDesc);
         }
