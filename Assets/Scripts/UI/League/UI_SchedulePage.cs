@@ -14,7 +14,7 @@ public class UI_SchedulePage : UI_TabControlPage
     [SerializeField]
     UN_DynamicListBox _dates = null;
 
-    bool _dirty = true;
+//TODO    bool _dirty = true;
 
     void OnEnable()
     {

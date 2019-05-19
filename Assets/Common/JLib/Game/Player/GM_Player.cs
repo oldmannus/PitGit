@@ -11,7 +11,7 @@ namespace JLib.Game
     /// </summary>
     public class GM_Player : GM_Identifiable
     {
-        public GM_Client Client { get { return _client; } }
+//PJS        public GM_Client Client { get { return _client; } }
 
         // TODO ### register and unregister GM_Clients
 
@@ -19,7 +19,7 @@ namespace JLib.Game
 
 
         //IProfile _profile = null;
-        GM_Client _client;
+// PJS TODO        GM_Client _client;
     }
 
     public class GM_PCPlayer : GM_Player

@@ -16,8 +16,8 @@ namespace Pit
         [SerializeField]
         Text _number = null;
 
-        [SerializeField]
-        Button _button = null;
+//        [SerializeField]
+  //PJS TODO      Button _button = null;
 
         BS_Action _action;
         int _ndx;

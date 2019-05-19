@@ -13,8 +13,8 @@ namespace JLib.Unity
         [SerializeField]
         GameObject _template = null;
 
-        [SerializeField]
-        bool _clip = true;
+  //      [SerializeField]
+    //PJS TODO    bool _clip = true;
 
         [SerializeField]
         RectTransform _boxFrame = null;

@@ -14,7 +14,7 @@ namespace JLib.Sim
     /// SM_Pawn is meant to represent the visual-aspect of a thingy that animates and exists in the world in some 
     /// game-sense of the word. Characters, traps, 'combatants' of any sort are pawns. Walls, doors, etc are generally not
     /// </summary>
-    public class SM_Pawn : MonoBehaviour, SM_ISelectable
+    public class SM_Pawn : SM_PawnMgrBase, SM_ISelectable
     {
         enum MoveModel
         {
@@ -34,13 +34,9 @@ namespace JLib.Sim
         }
 
 
-        [SerializeField]        MoveModel _mModel = MoveModel.NavMesh;
         [SerializeField]        State _state = State.Alive;
-        [SerializeField]        bool _ragdollDeath = true;
+//TODO        [SerializeField]        bool _ragdollDeath = true;
 
-        // these speeds are how fast we move in navmesh model. 
-        [SerializeField]        float _speed = 4.0f;
-        [SerializeField]        float _turnSpeed = 4.0f;
 
 
         // accessor properties
@@ -51,46 +47,20 @@ namespace JLib.Sim
         // Private data
 
         // TODO Maybe these should be serialized. 
-        [NonSerialized]        UnityEngine.AI.NavMeshAgent _nma = null;
         [NonSerialized]        SM_SelectableComponent _selection = null;
-        [NonSerialized]        SM_PawnAnimMgr _animationMgr = null;
-        [NonSerialized]        CharacterController _charControl = null;
         [NonSerialized]        object _gameParent = null;
 
-        [NonSerialized]        SM_PawnMove _mover;
+
+
 
         #region UNITY OVERRIDES 
 
 
         // ----------------------------------------------------------------------
-        protected virtual void Awake()
+        public override void Start()
         // ----------------------------------------------------------------------
         {
-            if (_mModel == MoveModel.NavMesh)
-                _mover = new SM_PawnMoveNavMesh();
-            else
-                _mover = new SM_PawnMoveVelocity();
-
-            _mover.Initialize(this, _speed, _turnSpeed);
-
-            _nma = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
-            Dbg.Assert(_nma != null, "Pawn requires nav mesh agent, but probably shouldn't"); // TODO remove dependency
-
-            _charControl = GetComponent<CharacterController>();
-            Dbg.Assert(_charControl != null, "Pawn requires CharacterController");
-
-            _animationMgr = GetComponentInChildren<SM_PawnAnimMgr>(true);
-            Dbg.Assert(_animationMgr != null, "Pawn requires SM_PawnAnimMgr");
-
-
-
-            _animationMgr.SetPawn(this);
-        }
-
-        // ----------------------------------------------------------------------
-        protected virtual void Start()
-        // ----------------------------------------------------------------------
-        {
+            base.Start();
             Events.SendGlobal(new PawnStartEvent() { Pawn = this });
         }
 
@@ -123,27 +93,16 @@ namespace JLib.Sim
         // ----------------------------------------------------------------------
         {
 
-            switch (CurState)
-            {
-                case State.Inactive: return;
-                case State.Dead: UpdateDead(); return;
-                case State.Alive: UpdateAlive(); return;
-                default: Dbg.Assert(false); return;
-            }
+            //switch (CurState)
+            //{
+            //    case State.Inactive: return;
+            //    case State.Dead: UpdateDead(); return;
+            //    case State.Alive: UpdateAlive(); return;
+            //    default: Dbg.Assert(false); return;
+            //}
         }
 
-        void UpdateDead()
-        {
-            // ### TODO : add dying logic 
-        }
-
-        void UpdateAlive()
-        {
-            _mover.Update();
-
-      
-        }
-
+        
 
         #endregion Unity Overrides
 
@@ -151,16 +110,16 @@ namespace JLib.Sim
 
         public bool IsHilighted { get { return _selection.IsHilighted; } }
         public bool IsSelected { get { return _selection.IsSelected; } }
-        public bool IsMovingForward { get { return _mover.IsMovingForward; } }
-        public bool IsMovingBackwards { get { return _mover.IsMovingBackwards; } }
-        public bool IsMovingLeft { get { return _mover.IsMovingLeft; } }
-        public bool IsMovingRight { get { return _mover.IsMovingRight; } }
-        public bool IsMoving { get { return _mover.IsMoving; } }
-        public bool IsIdling { get { return _mover.IsIdling; } }
+        public bool IsMovingForward { get { return Move.IsMovingForward; } }
+        public bool IsMovingBackwards { get { return Move.IsMovingBackwards; } }
+        public bool IsMovingLeft { get { return Move.IsMovingLeft; } }
+        public bool IsMovingRight { get { return Move.IsMovingRight; } }
+        public bool IsMoving { get { return Move.IsMoving; } }
+        public bool IsIdling { get { return Move.IsIdling; } }
 
-        public void SetVelocity(Vector3 v) { _mover.SetVelocity(v); }
-        public void SetRotationVelocity(Vector3 v) { _mover.SetRotationVelocity(v); }
-        public void SetDestination(Vector3 v) { _mover.SetDestination(v); }
+        public void SetVelocity(Vector3 v) { Move.SetVelocity(v); }
+        public void SetRotationVelocity(Vector3 v) { Move.SetRotationVelocity(v); }
+        public void SetDestination(Vector3 v) { Move.SetDestination(v); }
 
         #endregion
 
@@ -201,7 +160,7 @@ namespace JLib.Sim
         public void SetHilighted(bool b) { _selection.SetHilighted(b); }
         public void SetSelected(bool b) { _selection.SetSelected(b); }
 
-        public void StartAttack()        {            _animationMgr.StartAttack();        }
+        public void StartAttack()        {            Anim.StartAttack();        }
 
 
 

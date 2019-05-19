@@ -163,12 +163,12 @@ GameObject:
   - component: {fileID: 497310}
   - component: {fileID: 9547932}
   - component: {fileID: 6092240124450937753}
+  - component: {fileID: -578248301169543949}
   - component: {fileID: 5833281290545005476}
   - component: {fileID: 3985344553106656679}
   - component: {fileID: 5327053019963749291}
-  - component: {fileID: -832008169349026907}
   m_Layer: 0
-  m_Name: Lancer
+  m_Name: Lancer Copy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,6 +227,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-578248301169543949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a60c463ab2c9eab4a883c1a215545910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentWeapon: 0
 --- !u!195 &5833281290545005476
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -274,22 +287,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentWeapon: 0
---- !u!114 &-832008169349026907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8072de0489f90df43b92f6fe8dd3fb12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _state: 1
-  _ragdollDeath: 1
-  _speed: 4
-  _turnSpeed: 4
 --- !u!1 &108726
 GameObject:
   m_ObjectHideFlags: 0

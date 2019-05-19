@@ -4,15 +4,15 @@ using UnityEditor;
 
 public class UI_CombatantListEntry : MonoBehaviour
 {
-    [SerializeField]
-    Image _icon = null;
+//TODO    [SerializeField]
+//    Image _icon = null;
 
-    [SerializeField]
-    Text _name = null;
+    //[SerializeField]
+    //Text _name = null;
 
-    [SerializeField]
-    Text _class = null;
+//PJS TODO    [SerializeField]
+//    Text _class = null;
 
-    [SerializeField]
-    Text _race = null;
+ // PJS TODO   [SerializeField]
+//    Text _race = null;
 }

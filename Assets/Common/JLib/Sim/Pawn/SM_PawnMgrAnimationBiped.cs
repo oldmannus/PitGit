@@ -7,7 +7,7 @@ using JLib.Utilities;
 
 namespace JLib.Sim
 {
-    public class SM_PawnBipedAnimMgr : SM_PawnAnimMgr
+    public class SM_PawnMgrAnimationBiped : SM_PawnMgrAnimation
     {
         int _deathTriggerHash;
         int _weaponStateHash;
@@ -21,9 +21,9 @@ namespace JLib.Sim
 
 
 
-        public override void Awake()
+        public override void Start()
         {
-            base.Awake();
+            base.Start();
 
             _weaponStateHash = Animator.StringToHash("WeaponState");
             _nonCombatHash = Animator.StringToHash("NonCombat");
@@ -52,7 +52,7 @@ namespace JLib.Sim
         public override void Update()
         {
             base.Update();
-            _animator.SetBool(_idlingHash, _pawn.IsIdling);
+            _animator.SetBool(_idlingHash, Pawn.IsIdling);
         }
 
         public static int AnimationWeaponTypeToFemaleWarriorWeapons(AnimationWeaponType weapon)

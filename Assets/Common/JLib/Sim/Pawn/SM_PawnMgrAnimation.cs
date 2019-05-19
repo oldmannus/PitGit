@@ -21,7 +21,7 @@ namespace JLib.Sim
 
   
 
-    public abstract class SM_PawnAnimMgr : MonoBehaviour
+    public abstract class SM_PawnMgrAnimation : SM_PawnMgrBase
     {
         public AnimationWeaponType CurrentWeapon;
         public virtual void SetUsingWeapon(AnimationWeaponType weapon)
@@ -30,11 +30,15 @@ namespace JLib.Sim
         }
 
         protected Animator _animator;
-        protected SM_Pawn _pawn;
+        protected CharacterController _controller;
 
-        public virtual void Start() { }
-        public virtual void Awake()
+
+        public override void Start()
         {
+            base.Start();
+            _controller = GetComponent<CharacterController>();
+            Dbg.Assert(_controller != null, "Pawn requires CharacterController");
+            
             _animator = gameObject.GetComponent<Animator>();
             if (_animator == null)
                 _animator = gameObject.GetComponentInChildren<Animator>(true);
@@ -45,12 +49,6 @@ namespace JLib.Sim
         public abstract void StartAttack();
         public abstract void ApplyDamage();
         public abstract void Killed();
-
-        public void SetPawn(SM_Pawn pawn)
-        {
-            _pawn = pawn;
-        }
-
     }
 
 

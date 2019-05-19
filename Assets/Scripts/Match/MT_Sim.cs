@@ -252,6 +252,10 @@ namespace Pit
         // ------------------------------------------------------------------------------
         {
             Debug.Log("Arena ready, placing combatants");
+
+            // This is just to catch weird loading stuff when doing auto-load
+            if (this == null || _teams == null)
+                return; 
             _arena = ev.Space as MT_Arena;
 
             _widgetMgr = _arena.Widgets;

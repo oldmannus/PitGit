@@ -8,23 +8,23 @@ using JLib.Unity;
 
 public class UI_LeagueMenu : PT_MonoBehaviour
 {
-    [SerializeField]
-    UI_TabControl _tabs = null;
+//PJS TODO    [SerializeField]
+//    UI_TabControl _tabs = null;
 
-    [SerializeField]
-    Image _teamIcon = null;
+//TODO    [SerializeField]
+//    Image _teamIcon = null;
 
 
-    GameObject _currentPanel = null;
+// PJS TODO    GameObject _currentPanel = null;
 
 
     bool _hasStartedTransitionOut = false;
-    bool _goingBack = false;
+//PJS TODO    bool _goingBack = false;
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        _goingBack = false;
+        //_goingBack = false;
 
         //UN.SetActive(_myTeamPanel, false);
         //UN.SetActive(_matchPanel, false);
