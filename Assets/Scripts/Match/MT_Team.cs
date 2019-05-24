@@ -14,7 +14,12 @@ namespace Pit
         public int Score;
         public BS_Team Team;
         public List<MT_Combatant> Combatants { get; private set; }    // base combatants only carried over from match
-        
+
+        MT_TeamController _teamController = null;
+        public bool Surrendered { get { return _surrendered; } }
+
+        private bool _surrendered = false;
+
         // ---------------------------------------------------------------------------------------
         /// <summary>
         /// Create pawns for each combatant and place them in the world
@@ -43,6 +48,7 @@ namespace Pit
         // ---------------------------------------------------------------------------------------
         public void Shutdown()
         {
+            Events.RemoveGlobalListener<MT_SurrenderEvent>(OnSurrender);
             for (int i = 0; i < Combatants.Count; i++)
             {
                 Combatants[i].Shutdown();
@@ -51,7 +57,13 @@ namespace Pit
         }
 
 
-
+        void OnSurrender(MT_SurrenderEvent ev)
+        {
+            if (ev.Who == Id)
+            {
+                _surrendered = true;
+            }   
+        }
 
 
         // ---------------------------------------------------------------------------------------
@@ -69,6 +81,7 @@ namespace Pit
             Score = 0;
             TeamNdx = ndx;
             Team = team;
+            _surrendered = false;
 
             foreach (var v in team.GetCombatantsForMatch(matchParams))
             {
@@ -76,6 +89,43 @@ namespace Pit
                 cmbt.Initialize(v, this);
                 Combatants.Add(cmbt);
             }
+            // TODO change sendlocal/global so sending is generic, receiving specific
+            if (Team.IsAI)
+                _teamController = new MT_TeamControllerAI(this);
+            else
+                _teamController = new MT_TeamControllerPCLocal(this);   // TODO: implement remote team controller
+
+            
+        }
+
+        public void Update()
+        {
+           if (_teamController != null)
+            {
+                _teamController.Update();
+
+                if (_teamController.HasSurrendered())
+                {
+                    _surrendered = true;
+                    PT_Game.Match.PostEvent(new MT_SurrenderEvent(Team.Id), true);
+                }
+            }
+        }
+
+        // ------------------------------------------------------------------------------
+        public bool IsTeamOut()
+        // ------------------------------------------------------------------------------
+        {
+            if (Surrendered)
+                return true;
+
+            for (int i = 0; i < Combatants.Count; i++)
+            {
+                if (Combatants[i].IsOut == false)
+                    return false;
+            }
+
+            return true;
         }
     }
 }

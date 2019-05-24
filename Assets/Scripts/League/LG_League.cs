@@ -57,11 +57,9 @@ namespace Pit
 
 
         // --------------------------------------------------------------------------
-        protected override void Update()
+        protected override void DoUpdate()
         // --------------------------------------------------------------------------
         {
-            base.Update();
-
             // do this in update to avoid problem with starting matches while 
             // still unwinding from previous match
             if (_queuedMatches.Count != 0 && _curMatch == null)
@@ -70,6 +68,10 @@ namespace Pit
             }
         }
 
+        protected override void UpdateTime()
+        {
+            // TODO implement simtime
+        }
 
         // --------------------------------------------------------------------------
         /// <summary>

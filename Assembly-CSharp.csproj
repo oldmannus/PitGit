@@ -95,6 +95,7 @@
     <Compile Include="Assets\Common\JLib\Sim\SM_SelectionVisualComponent.cs" />
     <Compile Include="Assets\Common\JLib\Sim\SM_SelectionVisualProjector.cs" />
     <Compile Include="Assets\Common\JLib\Sim\SM_Sim.cs" />
+    <Compile Include="Assets\Common\JLib\Sim\SM_SimEvent.cs" />
     <Compile Include="Assets\Common\JLib\Unity\UN_ArcIndicator.cs" />
     <Compile Include="Assets\Common\JLib\Unity\UN_BehaviourSingleton.cs" />
     <Compile Include="Assets\Common\JLib\Unity\UN_Camera.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Assets\Common\JLib\Utilities\Other\EventWaitSet.cs" />
     <Compile Include="Assets\Common\JLib\Utilities\Other\FlagSet.cs" />
     <Compile Include="Assets\Common\JLib\Utilities\Other\JSON.cs" />
+    <Compile Include="Assets\Common\JLib\Utilities\Other\JSONEvents.cs" />
     <Compile Include="Assets\Common\JLib\Utilities\Other\MathExt.cs" />
     <Compile Include="Assets\Common\JLib\Utilities\Other\Misc.cs" />
     <Compile Include="Assets\Common\JLib\Utilities\Other\Scheduler.cs" />
@@ -271,8 +273,14 @@
     <Compile Include="Assets\Scripts\Match\MT_InputModeSelectTerrainPoint.cs" />
     <Compile Include="Assets\Scripts\Match\MT_MatchSimulator.cs" />
     <Compile Include="Assets\Scripts\Match\MT_PanningCamera.cs" />
+    <Compile Include="Assets\Scripts\Match\MT_PawnMgrBehaviorCombatant.cs" />
     <Compile Include="Assets\Scripts\Match\MT_Sim.cs" />
     <Compile Include="Assets\Scripts\Match\MT_Team.cs" />
+    <Compile Include="Assets\Scripts\Match\MT_TeamController.cs" />
+    <Compile Include="Assets\Scripts\Match\MT_TeamControllerAI.cs" />
+    <Compile Include="Assets\Scripts\Match\MT_TeamControllerPC.cs" />
+    <Compile Include="Assets\Scripts\Match\MT_TeamControllerPCLocal.cs" />
+    <Compile Include="Assets\Scripts\Match\MT_TeamControllerPCRemote.cs" />
     <Compile Include="Assets\Scripts\Match\MT_TileArena.cs" />
     <Compile Include="Assets\Scripts\UI\Game\UI_IntroMgr.cs" />
     <Compile Include="Assets\Scripts\UI\Game\UI_MainMenu.cs" />

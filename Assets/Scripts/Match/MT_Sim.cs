@@ -33,6 +33,8 @@ namespace Pit
         int _currentTeamNdx;    // the team whose turn it is
         UI_WidgetMgr _widgetMgr;
 
+        ulong? _winner = null;
+
         // syntactic sugar
         public MT_Team CurrentTeam { get { return _teams[_currentTeamNdx]; } }
         public MT_Arena Arena { get { return _arena; } }
@@ -49,9 +51,12 @@ namespace Pit
         protected override void Awake()
         // ------------------------------------------------------------------------------
         {
+            Paused = true;
             base.Awake();
             Events.AddGlobalListener<SM_SpaceStartedEvent>(OnArenaReady);
             Events.AddGlobalListener<GM_GamePhaseChangedEvent>(OnGamePhaseChange);
+            Events.AddGlobalListener<MT_SurrenderEvent>(OnSurrender);
+            Events.AddGlobalListener<MT_VictoryEvent>(OnVictory);
 
             _matchSimulator = gameObject.GetComponent<MT_MatchSimulator>();
             if (_matchSimulator == null)
@@ -59,28 +64,27 @@ namespace Pit
         }
 
         // ------------------------------------------------------------------------------
+        // TODO: kill in a more organized way
         protected override void OnDestroy()
         // ------------------------------------------------------------------------------
         {
             Events.RemoveGlobalListener<SM_SpaceStartedEvent>(OnArenaReady);
             Events.RemoveGlobalListener<GM_GamePhaseChangedEvent>(OnGamePhaseChange);
+            Events.RemoveGlobalListener<MT_SurrenderEvent>(OnSurrender);
+            Events.RemoveGlobalListener<MT_VictoryEvent>(OnVictory);
+
             base.OnDestroy();
         }
 
+        protected override void UpdateTime()
+        {
+            // TODO implement simtime
+        }
+
         // ------------------------------------------------------------------------------
-        protected override void Update()
+        protected override void DoUpdate()
         // ------------------------------------------------------------------------------
         {
-            base.Update();
-
-            // Handle end of match
-            if (_matchState == State.Running && IsMatchOver)
-            {
-                GM_Game.Popup.ClearStatus(true);
-                _matchState = State.Exiting;
-                Events.SendGlobal(new LG_SimMatchEndedEvent(_matchInfo));
-            }
-
             if (this.IsRunningAction)
             {
                 if (_currentActionIt.MoveNext() == false)
@@ -91,26 +95,22 @@ namespace Pit
                     _currentAction = null;
                 }
             }
+
+            if (_teams != null) 
+            {
+                foreach (var t in _teams)
+                {
+                    t.Update();
+                }
+            }
+
+            CheckForWinner();
         }
 
 
         #endregion
 
         #region Status Functions
-
-        // -------------------------------------------------------------------------
-        public bool IsMatchOver
-        // -------------------------------------------------------------------------
-        {
-            get
-            {
-                // hack for ai
-                if (_arenaDesc == null)
-                    return true;
-
-                return (GetNumActiveTeams() < 2);
-            }
-        }
 
         // -------------------------------------------------------------------------
         public bool IsRunning
@@ -127,7 +127,7 @@ namespace Pit
             int numStanding = 0;
             int tCount = GetTeamCount();
             for (int i = 0; i < GetTeamCount(); i++)
-                if (IsTeamOut(i) == false)
+                if (_teams[i].IsTeamOut() == false)
                     numStanding++;
 
             return numStanding;
@@ -162,20 +162,7 @@ namespace Pit
             return _teams[ndx].Score;
         }
 
-        // ------------------------------------------------------------------------------
-        public bool IsTeamOut(int teamNdx)
-        // ------------------------------------------------------------------------------
-        {
-            MT_Team t = _teams[teamNdx];
-
-            for (int i = 0; i < t.Combatants.Count; i++)
-            {
-                if (t.Combatants[i].IsOut == false)
-                    return false;
-            }
-
-            return true;
-        }
+       
         #endregion
 
 
@@ -209,6 +196,7 @@ namespace Pit
                 gpMatch.SceneName = arena.Name;
                 PT_Game.Phases.QueuePhase(gpMatch);
             }
+            Paused = false;
         }
 
         // -------------------------------------------------------------------------------
@@ -271,7 +259,7 @@ namespace Pit
             //### TODO add camera fade in here
 
             _currentTeamNdx = Rng.RandomInt(_teams.Count - 1);
-
+            _matchState = State.Running;
             Events.SendGlobal(new LG_SimMatchStartedEvent(_matchInfo));
         }
         #endregion Startup
@@ -310,6 +298,7 @@ namespace Pit
             _arenaDesc = null;
             _matchState = State.Idle;
             _teams = null;
+            _winner = null;
         }
 
 
@@ -321,6 +310,54 @@ namespace Pit
 
             // TODO tell everyone !?!
         }
+
+        // returns true if match is over
+        // returns winner if there is one. might have null winner if all teams dead
+        void CheckForWinner()
+        {
+  
+            if (_winner != null || _matchState != State.Running)
+                return;
+
+            ulong? winner = null;
+            foreach (var team in _teams)
+            {
+                if (team.IsTeamOut() == false)
+                {
+                    if (winner == null)
+                    {
+                        winner = team.Id;
+                    }
+                    else
+                    {
+                        // second active team, no winner and match continues
+                        return;
+                    }
+                }
+            }
+
+            _winner = winner ?? ulong.MaxValue;
+           
+            this.PostEvent(new MT_VictoryEvent((ulong)_winner));
+        }
+
+        void OnVictory(MT_VictoryEvent ev)
+        {
+            Dbg.Log("OnVictory: " + ev.Who);
+            // Handle end of match
+            if (_matchState == State.Running)
+            {
+                GM_Game.Popup.ClearStatus(true);
+                _matchState = State.Exiting;
+                Events.SendGlobal(new LG_SimMatchEndedEvent(_matchInfo));
+            }
+        }
+
+        void OnSurrender(MT_SurrenderEvent ev)
+        {
+            CheckForWinner();
+        }
+
 
         #region Actions
 
