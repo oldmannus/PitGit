@@ -17,7 +17,7 @@ namespace Pit
         {
             base.Update();
 
-            Team.Surrender();
+            Team.EndTurn();
         }
     }
 }

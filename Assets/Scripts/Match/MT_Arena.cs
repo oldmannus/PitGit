@@ -117,11 +117,20 @@ namespace Pit
 
         LG_ArenaDescriptor _desc = null;
         int _terrainLayerMask;
-
+        MT_ArenaGrid _grid = null;
 
         protected override void Start()
         {
             _terrainLayerMask = LayerMask.GetMask("Terrain");
+            _grid = GetComponent<MT_ArenaGrid>();
+
+            foreach (var sp in _spawnPoints)
+            {
+                Vector3 position = sp.gameObject.transform.position;
+                _grid.SnapToGrid(ref position);
+                sp.gameObject.transform.position = position;
+            }
+
             //_spawnPoints = new List<MT_ArenaSpawnPoint>();
 
             //MT_ArenaSpawnPoint[] pts = GetComponentsInChildren<MT_ArenaSpawnPoint>();

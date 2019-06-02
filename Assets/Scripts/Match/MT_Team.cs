@@ -115,8 +115,9 @@ namespace Pit
 
 
 
-
+        // ------------------------------------------------------------------------------
         public void Update()
+        // ------------------------------------------------------------------------------
         {
             UpdateTeamOut();
 
@@ -126,7 +127,12 @@ namespace Pit
             }
         }
 
+        // ------------------------------------------------------------------------------
+        /// <summary>
+        /// Command sent from controller to surrender
+        /// </summary>
         public void Surrender()
+        // ------------------------------------------------------------------------------
         {
             Dbg.Log("Team " + Team.DisplayName + " told to surrender ");
             _gameStatus = GameStatus.Surrendered;
@@ -136,7 +142,12 @@ namespace Pit
                 EndTurn();
         }
 
+        // ------------------------------------------------------------------------------
+        /// <summary>
+        /// Command sent from controller to EndTurn
+        /// </summary>
         public void EndTurn()
+        // ------------------------------------------------------------------------------
         {
             Dbg.Log("Team " + Team.DisplayName + " told to end turn ");
             Dbg.Assert(_turnStatus == TurnStatus.DoingTurn);
@@ -145,7 +156,7 @@ namespace Pit
         }
 
         // ------------------------------------------------------------------------------
-        public void UpdateTeamOut()
+        void UpdateTeamOut()
         // ------------------------------------------------------------------------------
         {
             if (IsOut)
@@ -160,7 +171,9 @@ namespace Pit
             _gameStatus = GameStatus.AllDead;
         }
 
+        // ------------------------------------------------------------------------------
         void OnTurnStart(MT_TeamStartTurnEvent ev)
+        // ------------------------------------------------------------------------------
         {
             if (ev.Who == Id)
             {

@@ -258,6 +258,7 @@
     <Compile Include="Assets\Scripts\League\LG_Schedule.cs" />
     <Compile Include="Assets\Scripts\Match\MT_ActionInstance.cs" />
     <Compile Include="Assets\Scripts\Match\MT_Arena.cs" />
+    <Compile Include="Assets\Scripts\Match\MT_ArenaGrid.cs" />
     <Compile Include="Assets\Scripts\Match\MT_ArenaSpawnPoint.cs" />
     <Compile Include="Assets\Scripts\Match\MT_Combatant.cs" />
     <Compile Include="Assets\Scripts\Match\MT_Event.cs" />
