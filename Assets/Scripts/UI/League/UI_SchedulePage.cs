@@ -18,8 +18,11 @@ public class UI_SchedulePage : UI_TabControlPage
 
     void OnEnable()
     {
-        if (GM_Game.IsLoaded && PT_Game.League.Schedule!= null)
-            BuildCalendar();
+        // might happen when running in editor
+        if (GM_Game.IsLoaded == false || PT_Game.League == null)
+            return;
+
+        BuildCalendar();
 
         Events.AddGlobalListener<LG_DayStartedEvent>(OnDayStarted);
         Events.AddGlobalListener<LG_DayEndedEvent>(OnDayEnded);

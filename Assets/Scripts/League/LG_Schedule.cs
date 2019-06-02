@@ -74,9 +74,7 @@ namespace Pit
                     Dbg.Assert(match.Day != -1);
 
                     Matches.Add(match);
-
-
-                    Dbg.Log(t1 + " vs " + t2 + " day: " + match.Day);
+                
                 }
 
             }

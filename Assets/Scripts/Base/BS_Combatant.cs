@@ -9,6 +9,8 @@ using JLib.Utilities;
 
 #if false
 
+Note: The properties here are not to intentded to be changed mid-match. That's what MT_Combatant is for
+
 Terminology:
     Property - a value that can be modified. Can even include race id and so forth (i.e. spell to turn gnome into troll)
         + Property name
@@ -29,6 +31,7 @@ Terminology:
 
 namespace Pit
 {
+
     // TODO: reimplement serialization [Serializable]
     public class BS_Combatant : IPropertied
     {
@@ -51,8 +54,11 @@ namespace Pit
         public Class            Class { get; private set; }
         public Gender           Gender { get; private set; }
         public Species          Species { get; private set; }
+        
 
-        public List<BS_Action>   Actions = new List<BS_Action>();
+        /// things the combatant can do
+        public List<BS_ActionTemplate>   Actions = new List<BS_ActionTemplate>();
+
         public List<BS_Modifier> Abilities = new List<BS_Modifier>();
 
 

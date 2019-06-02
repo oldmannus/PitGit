@@ -38,7 +38,10 @@ namespace Pit
         public BS_Team()
         // ---------------------------------------------------------------------------------------
         {
-            GM_Game.Finder.Register(this);
+            if (GM_Game.IsLoaded) // might be null when launching out of sequence
+            {
+                GM_Game.Finder.Register(this);
+            }
         }
 
         ~BS_Team()

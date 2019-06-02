@@ -121,7 +121,6 @@
     <Compile Include="Assets\Common\JLib\Utilities\Other\EventWaitSet.cs" />
     <Compile Include="Assets\Common\JLib\Utilities\Other\FlagSet.cs" />
     <Compile Include="Assets\Common\JLib\Utilities\Other\JSON.cs" />
-    <Compile Include="Assets\Common\JLib\Utilities\Other\JSONEvents.cs" />
     <Compile Include="Assets\Common\JLib\Utilities\Other\MathExt.cs" />
     <Compile Include="Assets\Common\JLib\Utilities\Other\Misc.cs" />
     <Compile Include="Assets\Common\JLib\Utilities\Other\Scheduler.cs" />
@@ -214,13 +213,13 @@
     <Compile Include="Assets\Common\JLib\Utilities\Triangle\Tools\Voronoi.cs" />
     <Compile Include="Assets\Common\JLib\Utilities\Triangle\Tools\VoronoiRegion.cs" />
     <Compile Include="Assets\Common\JLib\Utilities\Triangle\TriangleLocator.cs" />
-    <Compile Include="Assets\Scripts\Base\BS_Action.cs" />
     <Compile Include="Assets\Scripts\Base\BS_ActionConditional.cs" />
     <Compile Include="Assets\Scripts\Base\BS_ActionDesc.cs" />
     <Compile Include="Assets\Scripts\Base\BS_ActionEffectDesc.cs" />
     <Compile Include="Assets\Scripts\Base\BS_ActionInstance.cs" />
     <Compile Include="Assets\Scripts\Base\BS_ActionMeleeAtk.cs" />
     <Compile Include="Assets\Scripts\Base\BS_ActionMove.cs" />
+    <Compile Include="Assets\Scripts\Base\BS_ActionTemplate.cs" />
     <Compile Include="Assets\Scripts\Base\BS_Combatant.cs" />
     <Compile Include="Assets\Scripts\Base\BS_Feat.cs" />
     <Compile Include="Assets\Scripts\Base\BS_Keywords.cs" />
@@ -273,7 +272,6 @@
     <Compile Include="Assets\Scripts\Match\MT_InputModeSelectTerrainPoint.cs" />
     <Compile Include="Assets\Scripts\Match\MT_MatchSimulator.cs" />
     <Compile Include="Assets\Scripts\Match\MT_PanningCamera.cs" />
-    <Compile Include="Assets\Scripts\Match\MT_PawnMgrBehaviorCombatant.cs" />
     <Compile Include="Assets\Scripts\Match\MT_Sim.cs" />
     <Compile Include="Assets\Scripts\Match\MT_Team.cs" />
     <Compile Include="Assets\Scripts\Match\MT_TeamController.cs" />

@@ -16,12 +16,5 @@ namespace Pit
         public virtual void Update()
         {
         }
-
-        public virtual bool HasSurrendered()
-        {
-            // TODO don't surrender immediately :P
-            return true;
-        }
-
     }
 }

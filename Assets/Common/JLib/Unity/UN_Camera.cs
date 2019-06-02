@@ -24,11 +24,11 @@ namespace JLib.Unity
         
         public TagType Tag { get { return _tag; } }
 
-        private void Start()
+        private void OnEnable()
         {
             GM_Game.Cameras.Register(this);
         }
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (GM_Game.IsLoaded)                   // avoid using global resources if on destroy, as we might be shutting down
                 GM_Game.Cameras.Unregister(this);

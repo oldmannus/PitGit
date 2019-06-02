@@ -17,6 +17,17 @@ namespace Pit
         public MT_IDableEvent() { }
     }
 
+    public class MT_TeamStartTurnEvent : MT_IDableEvent
+    {
+        public MT_TeamStartTurnEvent(ulong who) : base(who) { }
+    }
+    public class MT_TeamEndTurnEvent : MT_IDableEvent
+    {
+        public MT_TeamEndTurnEvent(ulong who) : base(who) { }
+    }
+
+
+
     public class MT_SurrenderEvent : MT_IDableEvent
     {
         public MT_SurrenderEvent(ulong who) : base(who) { }

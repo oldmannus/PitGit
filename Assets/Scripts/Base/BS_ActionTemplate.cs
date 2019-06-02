@@ -12,10 +12,8 @@ namespace Pit
 {
 
     // this is an action that sits on the player list of actions that they can take. 
-    public abstract class BS_Action : GM_Detailable
+    public abstract class BS_ActionTemplate : GM_Detailable
     {
-        public BS_Combatant BaseCombatant { get; private set; }
-        public MT_Combatant Combatant { get; private set; }
   
         public enum Status
         {
@@ -45,7 +43,7 @@ namespace Pit
             Keyword,    // select an object with  given keyword in the world TODO: Implement this
         }
 
-        public BS_Action()
+        public BS_ActionTemplate()
         {
         }
 

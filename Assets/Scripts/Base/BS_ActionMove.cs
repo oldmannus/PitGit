@@ -8,7 +8,7 @@ using JLib.Utilities;
 
 namespace Pit
 {
-    public class BS_ActionMove : BS_Action
+    public class BS_ActionMove : BS_ActionTemplate
     {
         Vector3 _destinationPt;
         Vector3 _lastPt;

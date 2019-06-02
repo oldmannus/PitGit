@@ -27,7 +27,7 @@ namespace JLib.Utilities
         public static void LogWarning(string msg, string channel = NoChannel) { LogMsg("Warning: " + msg, channel, UnityEngine.Debug.LogWarning); }
         public static void Log(StringBuilder msg, string channel = NoChannel) { LogMsg("Log: " + msg.ToString(), channel, UnityEngine.Debug.Log); }
         public static void Log(string msg, string channel = NoChannel)        { LogMsg("Log: " + msg, channel, UnityEngine.Debug.Log); }
-
+        public static void LogWarningCond(bool b, string msg, string channel = NoChannel) { if (!b) { LogMsg("Warning: " + msg, channel, UnityEngine.Debug.LogWarning); } }
 
         // -----------------------------------------------------------------------------------------
         public static IEnumerator GetLogsByChannelExact( string channel, bool includeParents)

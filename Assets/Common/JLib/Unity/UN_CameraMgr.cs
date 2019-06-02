@@ -28,7 +28,7 @@ namespace JLib.Unity
 
         List<UN_Camera>[] _cameras;
 
-        protected void Awake()
+        protected UN_CameraMgr()
         {
             _cameras = new List<UN_Camera>[(int)UN_Camera.TagType.Count];
             for (int i = 0; i < (int)UN_Camera.TagType.Count; i++)
@@ -50,6 +50,8 @@ namespace JLib.Unity
 
         public void Register(UN_Camera cam)
         {
+            Dbg.Assert(cam != null);
+            Dbg.Assert(_cameras != null);
             Dbg.Assert(FindCameraNdx(cam) < 0);
             _cameras[(int)cam.Tag].Add(cam);
         }

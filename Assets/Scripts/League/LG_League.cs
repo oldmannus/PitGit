@@ -84,11 +84,12 @@ namespace Pit
         void OnMatchCompleted(LG_SimMatchEndedEvent ev)
         // --------------------------------------------------------------------------
         {
-            _curMatch = null;
-            if (_queuedMatches.Count == 0)
-            {
-                AdvanceDay();
-            }
+            // TODO fix
+            //_curMatch = null;
+            //if (_queuedMatches.Count == 0)
+            //{
+            //    AdvanceDay();
+            //}
         }
 
         void AdvanceDay()
@@ -116,6 +117,9 @@ namespace Pit
             yield return null;
 
             Teams = new List<BS_Team>();
+
+            // TODO: reimplement player teams
+
 
             for (int i = 0; i < numTeams; i++)
             {

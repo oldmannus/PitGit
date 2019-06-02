@@ -19,11 +19,11 @@ namespace Pit
 //        [SerializeField]
   //PJS TODO      Button _button = null;
 
-        BS_Action _action;
+        BS_ActionTemplate _action;
         int _ndx;
         MT_Combatant _who;
 
-        public void Set(MT_Combatant who, BS_Action act, int ndx)
+        public void Set(MT_Combatant who, BS_ActionTemplate act, int ndx)
         {
             _who = who;
             _action = act;
