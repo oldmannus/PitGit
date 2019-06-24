@@ -17,7 +17,38 @@ namespace Pit
         {
             base.Update();
 
-            Team.EndTurn();
+
+            if (CurCombatant == null)
+            {
+                Team.EndTurn();
+            }
+
+            Dbg.Assert(CurCombatant.ActionPoints != 0);
+
+            // quick and dirty
+            if (CurCombatant.CurrentAction == null)
+            {
+                MT_ActionInstance action = SelectAction(CurCombatant);
+            }
         }
+
+        // AI root
+        MT_ActionInstance SelectAction(MT_Combatant comb)
+        {
+            MT_Combatant target = MT_CombatUtils.FindClosestMeleeTarget(comb);
+            if (target != null)
+            {
+                if (MT_CombatUtils.IsInMeleeRange(comb, target))
+                {
+                    
+                }
+                else
+                {
+
+                }
+            }
+            return null;// TODO FIX
+        }
+
     }
 }

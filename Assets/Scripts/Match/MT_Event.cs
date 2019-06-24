@@ -50,4 +50,14 @@ namespace Pit
     { }
 
 
+    /// <summary>
+    /// UI event?
+    /// </summary>
+    public class MT_SetCurrentCombatantEvent : SM_SimEvent
+    {
+        public MT_Combatant Who;
+        public MT_Team Team;
+    }
+ 
+
 }

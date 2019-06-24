@@ -118,7 +118,7 @@ namespace Pit
             Color clr = img.color;
             while (Time.time < endTime)
             {
-                clr.a = Mathf.Clamp01(MathExt.LerpTime(0, 1.0f, startTime, endTime));
+                clr.a = Mathf.Clamp01(MathExt.LerpTime(0, 1.0f, Time.time, startTime, endTime));
                 img.color = clr;
                 yield return null;
             }

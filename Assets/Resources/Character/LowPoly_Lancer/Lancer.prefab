@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 3985344553106656679}
   - component: {fileID: 5327053019963749291}
   - component: {fileID: -832008169349026907}
+  - component: {fileID: -5787877530543570870}
   m_Layer: 0
   m_Name: Lancer
   m_TagString: Untagged
@@ -261,6 +262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4238fdb53542e44acac7bcb7b1df66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 4
+  _turnSpeed: 4
 --- !u!114 &5327053019963749291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,9 +290,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 1
-  _ragdollDeath: 1
-  _speed: 4
-  _turnSpeed: 4
+--- !u!114 &-5787877530543570870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb7e8f0283365d4d9f147192ca29217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &108726
 GameObject:
   m_ObjectHideFlags: 0

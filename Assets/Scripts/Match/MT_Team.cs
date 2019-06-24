@@ -179,12 +179,43 @@ namespace Pit
             {
                 Dbg.Assert(_turnStatus == TurnStatus.WaitingTurn);
                 _turnStatus = TurnStatus.DoingTurn;
+                foreach (MT_Combatant c in Combatants)
+                {
+                    c.StartTurn();
+                }
                 Dbg.Log("Team " + Team.DisplayName + " started turn ");
             }
             else if (_turnStatus == TurnStatus.TurnOver)
             {
                 _turnStatus = TurnStatus.WaitingTurn;
             }
+        }
+
+
+        public MT_Combatant NextValidCombatant(MT_Combatant cmb)
+        {
+            if (cmb == null)
+            {
+                cmb = Combatants[0];
+                if (!cmb.IsOut && cmb.ActionPoints != 0)
+                {
+                    return cmb;
+                }
+            }
+
+            for (int i = 0; i < Combatants.Count; i++)
+            {
+                if (Combatants[i] == cmb)
+                {
+                    cmb = null;
+                    for (int next = (i + 1) % Combatants.Count; next != i; next = (next + 1) % Combatants.Count)
+                    {
+                        if (!Combatants[next].IsOut && Combatants[next].ActionPoints != 0)
+                            return Combatants[next];
+                    }
+                }
+            }
+            return null;
         }
     }
 }

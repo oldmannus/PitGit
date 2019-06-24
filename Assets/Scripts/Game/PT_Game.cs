@@ -35,5 +35,28 @@ namespace Pit
             GM_Game.Players.CurLocalPlayer = new PT_Player();
         }
 
+        static string LoadTextAsset(string name)
+        {
+            TextAsset ta = UnityEngine.Resources.Load(name) as TextAsset;
+            return ta.text;
+        }
+        static void UnityAssert(bool b)
+        {
+            Debug.Assert(b);
+        }
+        static void UnityAssert(bool b, string msg)
+        {
+            Debug.Assert(b, msg);
+        }
+
+        private void Awake()
+        {
+            FileUtils.SetTextAssetResourceLoader(LoadTextAsset);
+            Dbg.SetLogFunc(Debug.Log);
+            Dbg.SetWarnFunc(Debug.LogWarning);
+            Dbg.SetErrorFunc(Debug.LogError);
+            Dbg.SetAssertFunc(UnityAssert);
+            Dbg.SetAssertFuncStr(UnityAssert);
+        }
     }
 }

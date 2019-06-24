@@ -33,7 +33,7 @@ namespace Pit
         int _currentTeamNdx = -1;    // the team whose turn it is
         UI_WidgetMgr _widgetMgr;
         int _round = 0;
-
+ 
         ulong? _winner = null;
 
         // syntactic sugar
@@ -44,8 +44,8 @@ namespace Pit
         public MT_PanningCamera MainCamera { get { return PT_Game.Cameras.FirstMainCamera() as MT_PanningCamera; } }
         public bool IsRunning { get { return _matchState == State.Running; } }
         public int TeamCount { get { return _teams.Count; } }
-        
-
+        public List<MT_Team> Teams { get { return _teams; } }
+       
         // -------------------------------------------------------------------------
         public int GetNumActiveTeams()
         // -------------------------------------------------------------------------
@@ -58,12 +58,6 @@ namespace Pit
             return numStanding;
         }
 
-        // ------------------------------------------------------------------------------
-        public BS_Team GetTeam(int ndx)
-        // ------------------------------------------------------------------------------
-        {
-            return _teams[ndx].Team;
-        }
 
         // ------------------------------------------------------------------------------
         public List<MT_Combatant> GetTeamCombatants(int ndx)
@@ -309,7 +303,7 @@ namespace Pit
 
         // ------------------------------------------------------------------------------
         /// <summary>
-        /// Called when we're really, really, really about to start the match
+        /// Called when MT_Arena component has been loaded
         /// </summary>
         /// <param name="ev"></param>
         void OnArenaReady(SM_SpaceStartedEvent ev)
@@ -328,7 +322,7 @@ namespace Pit
             {
                 _teams[i].PlaceCombatants(_arena);
             }
-            
+        
             _matchState = State.Running;
             Events.SendGlobal(new LG_SimMatchStartedEvent(_matchInfo));
         }

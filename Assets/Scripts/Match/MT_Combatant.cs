@@ -17,16 +17,21 @@ namespace Pit
     /// </summary>
     public class MT_Combatant
     {
-        public MT_Team      Team {  get { return _team; } }
-        public SM_Pawn      Pawn { get { return _pawn; } }
+        public MT_Team Team { get { return _team; } }
+        public SM_Pawn Pawn { get { return _pawn; } }
         public BS_Combatant Base { get { return _base; } }
+
+
+        public IVec3 GridPos { get; set; }
+        public int ActionPoints { get; private set; }
 
         public bool IsSelected { get { return _pawn.IsSelected; } }
         public bool IsOut { get; private set; }// has this guy been knocked out, seriously injured, dead, etc. Out forever
 
         protected List<BS_ActionTemplate> _availableActions = new List<BS_ActionTemplate>();
         protected List<BS_ActionMove> _availableMoves = new List<BS_ActionMove>();
-
+        
+        public MT_ActionInstance CurrentAction { get; set; }
 
 
         MT_Team _team;
@@ -58,6 +63,8 @@ namespace Pit
 
             // TODO remove selection projector connecting in combatant.
 
+            GridPos = PT_Game.Match.Arena.Grid.WorldToGrid(_pawn.transform.position);
+
             GameObject proj = GM_Game.Resources.InstantiateFromResource("CharacterModels/SelectionProjector", go.transform, Vector3.zero, Quaternion.identity);
             proj.transform.localPosition = Vector3.zero;
             _pawn.SetSelection(proj.GetComponent<SM_SelectableComponent>());
@@ -77,8 +84,13 @@ namespace Pit
             foreach (BS_ActionTemplate v in Base.Actions)
             {
                 if (v.GetStatus(this) == BS_ActionTemplate.Status.Available)
-                    list.Add(v as T );
+                    list.Add(v as T);
             }
+        }
+
+        public void StartTurn()
+        {
+            ActionPoints = (int)Base.ActionPoints;
         }
     }
 }

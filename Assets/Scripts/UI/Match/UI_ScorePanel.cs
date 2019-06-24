@@ -47,12 +47,12 @@ namespace Pit
             if (PT_Game.Match.GetNumActiveTeams() == 0)      // really only happens when debugging from match scene
                 return;
             // ### TODO: implement 3+ teams
-            BS_Team team = PT_Game.Match.GetTeam(0);
+            BS_Team team = PT_Game.Match.Teams[0].Team;
             UN.SetText(_teamL, team.DisplayName);
             //_teamL.color = team.BaseColor;
             //_scoreL.color = team.BaseColor;
 
-            team = PT_Game.Match.GetTeam(1);
+            team = PT_Game.Match.Teams[1].Team;
             UN.SetText(_teamR, team.DisplayName);
             //_teamR.color = team.BaseColor;
             //_scoreR.color = team.BaseColor;

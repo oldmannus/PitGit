@@ -34,7 +34,7 @@ namespace Pit
 
         List<UI_CombatantMiniDisplay> _combatants = new List<UI_CombatantMiniDisplay>();
 
-        BS_Team _team = null;
+        MT_Team _team = null;
 
 
         protected override void Awake()
@@ -51,7 +51,7 @@ namespace Pit
             if (PT_Game.Match == null)
                 return;
             
-            _team = PT_Game.Match.GetTeam(_teamNdx);
+            _team = PT_Game.Match.Teams[_teamNdx];
             if (_team == null)
             {
                 Dbg.LogWarning("Not team for this display");
@@ -59,9 +59,9 @@ namespace Pit
                 return;
             }
 
-            _backGround.color = _team.BaseColor;
+            _backGround.color = _team.Team.BaseColor;
 
-            UN.SetText(_teamName, _team.DisplayName);
+            UN.SetText(_teamName, _team.Team.DisplayName);
             UN.SetText(_scoreText, PT_Game.Match.GetTeamScore(_teamNdx).ToString());
 
 

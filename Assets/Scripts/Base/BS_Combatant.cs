@@ -121,7 +121,7 @@ namespace Pit
                 _properties.AddProperty((BS_PropertyId)i);
             }
 
-
+    
             // pick a random race. 
             // TODO add probabilities?
             Species = PT_Game.Data.Species.GetRandom();
