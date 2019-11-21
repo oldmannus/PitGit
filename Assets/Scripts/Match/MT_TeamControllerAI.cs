@@ -25,15 +25,15 @@ namespace Pit
 
             Dbg.Assert(CurCombatant.ActionPoints != 0);
 
-            // quick and dirty
-            if (CurCombatant.CurrentAction == null)
-            {
-                MT_ActionInstance action = SelectAction(CurCombatant);
-            }
+            //// quick and dirty
+            //if (CurCombatant.CurrentAction == null)
+            //{
+            //    MT_Action action = SelectAction(CurCombatant);
+            //}
         }
 
         // AI root
-        MT_ActionInstance SelectAction(MT_Combatant comb)
+        BS_Action SelectAction(MT_Combatant comb)
         {
             MT_Combatant target = MT_CombatUtils.FindClosestMeleeTarget(comb);
             if (target != null)

@@ -19,11 +19,11 @@ namespace Pit
 //        [SerializeField]
   //PJS TODO      Button _button = null;
 
-        BS_ActionTemplate _action;
+        BS_Action _action;
         int _ndx;
         MT_Combatant _who;
 
-        public void Set(MT_Combatant who, BS_ActionTemplate act, int ndx)
+        public void Set(MT_Combatant who, BS_Action act, int ndx)
         {
             _who = who;
             _action = act;
@@ -34,14 +34,14 @@ namespace Pit
 
             if (_image != null)
             {
-                _image.sprite = act.Icon;
+            //###    _image.sprite = act.Icon;
             }
             // ### TODO : add icons!
         }
 
         public void OnClick()
         {
-            PT_Game.Match.StartAction(_action, _who);
+    // TO DO PJS        PT_Game.Match.StartAction(_action, _who);
         }
 
         /// <summary>

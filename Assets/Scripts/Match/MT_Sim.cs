@@ -45,7 +45,8 @@ namespace Pit
         public bool IsRunning { get { return _matchState == State.Running; } }
         public int TeamCount { get { return _teams.Count; } }
         public List<MT_Team> Teams { get { return _teams; } }
-       
+        public int Round { get { return _round; } }
+
         // -------------------------------------------------------------------------
         public int GetNumActiveTeams()
         // -------------------------------------------------------------------------
@@ -374,26 +375,26 @@ namespace Pit
 
         #region Actions
 
-        BS_ActionTemplate _currentAction = null;
-        IEnumerator _currentActionIt = null;
+        //BS_Action _currentAction = null;
+        //IEnumerator _currentActionIt = null;
 
-        public bool IsRunningAction
-        {
-            get { return _currentAction != null; }
-        }
+        //public bool IsRunningAction
+        //{
+        //    get { return _currentAction != null; }
+        //}
 
-        /// <summary>
-        /// Called when a combatant has selected an action to run. 
-        /// For now, we assume we only allow one action at a time to run. 
-        /// </summary>
-        /// <param name="ndx"></param>
-        public void StartAction(BS_ActionTemplate action, MT_Combatant comb)
-        {
-            if (IsRunningAction)
-                return;
-            _currentAction = action;
-            _currentActionIt = action.Execute(comb);
-        }
+        ///// <summary>
+        ///// Called when a combatant has selected an action to run. 
+        ///// For now, we assume we only allow one action at a time to run. 
+        ///// </summary>
+        ///// <param name="ndx"></param>
+        //public void StartAction(BS_Action action, MT_Combatant comb)
+        //{
+        //    if (IsRunningAction)
+        //        return;
+        //    _currentAction = action;
+        //    _currentActionIt = action.Execute(comb);
+        //}
 
 
         #endregion

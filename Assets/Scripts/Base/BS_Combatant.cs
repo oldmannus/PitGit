@@ -57,7 +57,7 @@ namespace Pit
         
 
         /// things the combatant can do
-        public List<BS_ActionTemplate>   Actions = new List<BS_ActionTemplate>();
+        public List<BS_Action>   Actions = new List<BS_Action>();
 
         public List<BS_Modifier> Abilities = new List<BS_Modifier>();
 

@@ -28,12 +28,6 @@ namespace Pit
         public bool IsSelected { get { return _pawn.IsSelected; } }
         public bool IsOut { get; private set; }// has this guy been knocked out, seriously injured, dead, etc. Out forever
 
-        protected List<BS_ActionTemplate> _availableActions = new List<BS_ActionTemplate>();
-        protected List<BS_ActionMove> _availableMoves = new List<BS_ActionMove>();
-        
-        public MT_ActionInstance CurrentAction { get; set; }
-
-
         MT_Team _team;
         BS_Combatant _base;
         SM_Pawn _pawn;
@@ -76,16 +70,6 @@ namespace Pit
             _base = null;
             _pawn = null;
             _team = null;
-        }
-
-        public void GetAvailableActions<T>(ref List<T> list) where T : BS_ActionTemplate
-        {
-            list.Clear();
-            foreach (BS_ActionTemplate v in Base.Actions)
-            {
-                if (v.GetStatus(this) == BS_ActionTemplate.Status.Available)
-                    list.Add(v as T);
-            }
         }
 
         public void StartTurn()
