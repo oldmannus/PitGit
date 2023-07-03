@@ -8,3 +8,5 @@ obj/Debug
 .vs/PitGit
 .vs/PitGit/v15
 Temp
+Assembly-CSharp.csproj
+Assets/Common/JsonDotNet/Documentation.meta

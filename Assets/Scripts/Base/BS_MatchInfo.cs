@@ -22,7 +22,7 @@ namespace Pit
     {
         public int WinningTeamNdx;
         public bool WasSimulated;
-        public List<MT_RecordedEvent> Events = new List<MT_RecordedEvent>();  // everything that happened
+        public List<SM_SimEvent> Events = new List<SM_SimEvent>();  // everything that happened
 
         // matching the overall team indeces
         public class TeamResult

@@ -96,7 +96,7 @@ namespace JLib.Game
 
             UN_CameraFade.ClearAll();
             bool readyToSwitch1 = false;
-            UN_CameraFade.FadeToBlack(() => { readyToSwitch1 = true; }, 2.0f);      //### PJS TO DO : remove time
+            UN_CameraFade.FadeToBlack(() => { readyToSwitch1 = true; }, 2.0f);      //### PJS TODO : remove time
 
             IEnumerator it;
             _previousPhase = _curPhase;

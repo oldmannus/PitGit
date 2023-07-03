@@ -15,8 +15,8 @@ public class UI_TabControl : MonoBehaviour
     [SerializeField]
     bool _returnToDefault = false;
 
-    [SerializeField]
-    int _defaultNdx = 0;
+    //[SerializeField]
+    //int _defaultNdx = 0;
 
 
     [SerializeField]

@@ -110,18 +110,26 @@ namespace Pit
 
             Events.SendGlobal(new SetMapEvent() { Arena = this });
         }
-
-
+        public MT_ArenaGrid Grid { get; private set; }
+        
 
         #region Internals
 
         LG_ArenaDescriptor _desc = null;
         int _terrainLayerMask;
-
-
+        
         protected override void Start()
         {
             _terrainLayerMask = LayerMask.GetMask("Terrain");
+            Grid = GetComponent<MT_ArenaGrid>();
+
+            foreach (var sp in _spawnPoints)
+            {
+                Vector3 position = sp.gameObject.transform.position;
+               Grid.SnapToGrid(ref position);
+                sp.gameObject.transform.position = position;
+            }
+
             //_spawnPoints = new List<MT_ArenaSpawnPoint>();
 
             //MT_ArenaSpawnPoint[] pts = GetComponentsInChildren<MT_ArenaSpawnPoint>();

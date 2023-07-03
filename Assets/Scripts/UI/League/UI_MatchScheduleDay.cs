@@ -12,8 +12,8 @@ using JLib.Unity;
  */
 public class UI_MatchScheduleDay : MonoBehaviour
 {
-    [SerializeField]
-    Button _button = null;
+//TODO    [SerializeField]
+//    Button _button = null;
 
     [SerializeField]
     GameObject _opposingTeamIcon = null;

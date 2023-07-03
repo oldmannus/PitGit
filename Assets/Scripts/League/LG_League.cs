@@ -57,11 +57,9 @@ namespace Pit
 
 
         // --------------------------------------------------------------------------
-        protected override void Update()
+        protected override void DoUpdate()
         // --------------------------------------------------------------------------
         {
-            base.Update();
-
             // do this in update to avoid problem with starting matches while 
             // still unwinding from previous match
             if (_queuedMatches.Count != 0 && _curMatch == null)
@@ -70,6 +68,10 @@ namespace Pit
             }
         }
 
+        protected override void UpdateTime()
+        {
+            // TODO implement simtime
+        }
 
         // --------------------------------------------------------------------------
         /// <summary>
@@ -82,11 +84,12 @@ namespace Pit
         void OnMatchCompleted(LG_SimMatchEndedEvent ev)
         // --------------------------------------------------------------------------
         {
-            _curMatch = null;
-            if (_queuedMatches.Count == 0)
-            {
-                AdvanceDay();
-            }
+            // TODO fix
+            //_curMatch = null;
+            //if (_queuedMatches.Count == 0)
+            //{
+            //    AdvanceDay();
+            //}
         }
 
         void AdvanceDay()
@@ -114,6 +117,9 @@ namespace Pit
             yield return null;
 
             Teams = new List<BS_Team>();
+
+            // TODO: reimplement player teams
+
 
             for (int i = 0; i < numTeams; i++)
             {
@@ -221,7 +227,7 @@ namespace Pit
             Dbg.Log("Initializing Arenas");
 
             LG_ArenaDescriptor arenaDesc = new LG_ArenaDescriptor();
-     //       arenaDesc.Name = "Arena2";  // TO DO fix arena selection
+     //       arenaDesc.Name = "Arena2";  // TODO fix arena selection
             arenaDesc.Name = "Arena3";
             _arenas.Add(arenaDesc);
         }

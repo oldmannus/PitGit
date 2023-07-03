@@ -63,11 +63,11 @@ namespace Pit
 
             GM_Game.Popup.ShowPopup("Loading Species");
             yield return null;
-            Species.LoadData("species");
+            Species.LoadFromAsset("species");
 
             GM_Game.Popup.ShowPopup("Loading Icons");
             yield return null;
-            Icons.LoadData("icons");
+            Icons.LoadFromAsset("icons");
 
 
             GM_Game.Popup.ClearStatus(true);

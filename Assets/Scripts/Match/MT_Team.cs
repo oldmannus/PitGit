@@ -14,7 +14,67 @@ namespace Pit
         public int Score;
         public BS_Team Team;
         public List<MT_Combatant> Combatants { get; private set; }    // base combatants only carried over from match
-        
+
+        MT_TeamController _teamController = null;
+        public bool IsOut { get { return (int)_gameStatus >= (int)GameStatus.GenericOut; } }
+        public bool IsTurnOver { get { return _turnStatus == TurnStatus.TurnOver; } }
+
+        enum TurnStatus
+        {
+            Uninitialized,
+            Initialized,
+            WaitingTurn,
+            TurnOver,
+            DoingTurn
+        }
+
+        enum GameStatus
+        {
+            Active,
+            GenericOut, // everything after this is different flavors of out
+            Surrendered,
+            AllDead
+        };
+
+        TurnStatus _turnStatus = TurnStatus.Uninitialized;
+        GameStatus _gameStatus = GameStatus.Active;
+
+        // ---------------------------------------------------------------------------------------
+        /// <summary>
+        /// Called when we're preparing to go into the match. I.e. still in League, about to go to Match.
+        /// Creates list of MatchCombatant structures
+        /// </summary>
+        /// <param name="ndx"></param>
+        /// <param name="team"></param>
+        /// <param name="matchParams"></param>
+        public void Initialize(int ndx, BS_Team team, BS_MatchParams matchParams)
+        // ---------------------------------------------------------------------------------------
+        {
+            Combatants = new List<MT_Combatant>();
+            Score = 0;
+            TeamNdx = ndx;
+            Team = team;
+         
+
+            foreach (var v in team.GetCombatantsForMatch(matchParams))
+            {
+                MT_Combatant cmbt = new MT_Combatant();
+                cmbt.Initialize(v, this);
+                Combatants.Add(cmbt);
+            }
+            // TODO reimplement PC teams
+            if (Team.IsAI || true)
+                _teamController = new MT_TeamControllerAI(this);
+            else
+                _teamController = new MT_TeamControllerPCLocal(this);   // TODO: implement remote team controller
+
+            Events.AddGlobalListener<MT_TeamStartTurnEvent>(OnTurnStart);
+
+            _turnStatus = TurnStatus.Initialized;
+            _gameStatus = GameStatus.Active;
+        }
+
+
         // ---------------------------------------------------------------------------------------
         /// <summary>
         /// Create pawns for each combatant and place them in the world
@@ -34,6 +94,8 @@ namespace Pit
 
                 Combatants[i].PlaceInArena(sp, arena.PawnRoot.transform);
             }
+
+            _turnStatus = TurnStatus.WaitingTurn;
         }
 
         // ---------------------------------------------------------------------------------------
@@ -43,6 +105,7 @@ namespace Pit
         // ---------------------------------------------------------------------------------------
         public void Shutdown()
         {
+            Events.RemoveGlobalListener<MT_TeamStartTurnEvent>(OnTurnStart);
             for (int i = 0; i < Combatants.Count; i++)
             {
                 Combatants[i].Shutdown();
@@ -52,30 +115,107 @@ namespace Pit
 
 
 
-
-
-        // ---------------------------------------------------------------------------------------
-        /// <summary>
-        /// Called when we're preparing to go into the match. I.e. still in League, about to go to Match.
-        /// Creates list of MatchCombatant structures
-        /// </summary>
-        /// <param name="ndx"></param>
-        /// <param name="team"></param>
-        /// <param name="matchParams"></param>
-        public void Initialize(int ndx, BS_Team team, BS_MatchParams matchParams)
-        // ---------------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        public void Update()
+        // ------------------------------------------------------------------------------
         {
-            Combatants = new List<MT_Combatant>();
-            Score = 0;
-            TeamNdx = ndx;
-            Team = team;
+            UpdateTeamOut();
 
-            foreach (var v in team.GetCombatantsForMatch(matchParams))
+            if (_teamController != null)
             {
-                MT_Combatant cmbt = new MT_Combatant();
-                cmbt.Initialize(v, this);
-                Combatants.Add(cmbt);
+                _teamController.Update();
             }
+        }
+
+        // ------------------------------------------------------------------------------
+        /// <summary>
+        /// Command sent from controller to surrender
+        /// </summary>
+        public void Surrender()
+        // ------------------------------------------------------------------------------
+        {
+            Dbg.Log("Team " + Team.DisplayName + " told to surrender ");
+            _gameStatus = GameStatus.Surrendered;
+            PT_Game.Match.PostEvent(new MT_SurrenderEvent(Team.Id), true);
+
+            if (_turnStatus == TurnStatus.DoingTurn)
+                EndTurn();
+        }
+
+        // ------------------------------------------------------------------------------
+        /// <summary>
+        /// Command sent from controller to EndTurn
+        /// </summary>
+        public void EndTurn()
+        // ------------------------------------------------------------------------------
+        {
+            Dbg.Log("Team " + Team.DisplayName + " told to end turn ");
+            Dbg.Assert(_turnStatus == TurnStatus.DoingTurn);
+            _turnStatus = TurnStatus.TurnOver;
+            PT_Game.Match.PostEvent(new MT_TeamEndTurnEvent(Team.Id), true);
+        }
+
+        // ------------------------------------------------------------------------------
+        void UpdateTeamOut()
+        // ------------------------------------------------------------------------------
+        {
+            if (IsOut)
+                return;
+
+            for (int i = 0; i < Combatants.Count; i++)
+            {
+                if (Combatants[i].IsOut == false)
+                    return;
+            }
+
+            _gameStatus = GameStatus.AllDead;
+        }
+
+        // ------------------------------------------------------------------------------
+        void OnTurnStart(MT_TeamStartTurnEvent ev)
+        // ------------------------------------------------------------------------------
+        {
+            if (ev.Who == Id)
+            {
+                Dbg.Assert(_turnStatus == TurnStatus.WaitingTurn);
+                _turnStatus = TurnStatus.DoingTurn;
+                foreach (MT_Combatant c in Combatants)
+                {
+                    c.StartTurn();
+                }
+                Dbg.Log("Team " + Team.DisplayName + " started turn ");
+            }
+            else if (_turnStatus == TurnStatus.TurnOver)
+            {
+                _turnStatus = TurnStatus.WaitingTurn;
+            }
+        }
+
+
+        public MT_Combatant NextValidCombatant(MT_Combatant cmb)
+        {
+            if (cmb == null)
+            {
+                cmb = Combatants[0];
+                if (!cmb.IsOut && cmb.ActionPoints != 0)
+                {
+                    return cmb;
+                }
+            }
+
+            for (int i = 0; i < Combatants.Count; i++)
+            {
+                if (Combatants[i] == cmb)
+                {
+                    cmb = null;
+                    for (int next = (i + 1) % Combatants.Count; next != i; next = (next + 1) % Combatants.Count)
+                    {
+                        if (!Combatants[next].IsOut && Combatants[next].ActionPoints != 0)
+                            return Combatants[next];
+                    }
+                }
+            }
+            return null;
         }
     }
 }

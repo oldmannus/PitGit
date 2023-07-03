@@ -52,7 +52,7 @@ namespace Pit
                 {
                     if (c.Base.Actions != null && numKeyDown <= c.Base.Actions.Count)
                     {
-                        PT_Game.Match.StartAction(c.Base.Actions[numKeyDown - 1], c); // TODO : replace with event?
+                    //    PT_Game.Match.StartAction(c.Base.Actions[numKeyDown - 1], c); // TODO : replace with event?
                         return true;
                     }
                 }

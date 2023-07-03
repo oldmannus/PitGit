@@ -38,7 +38,10 @@ namespace Pit
         public BS_Team()
         // ---------------------------------------------------------------------------------------
         {
-            GM_Game.Finder.Register(this);
+            if (GM_Game.IsLoaded) // might be null when launching out of sequence
+            {
+                GM_Game.Finder.Register(this);
+            }
         }
 
         ~BS_Team()
@@ -52,7 +55,11 @@ namespace Pit
         public void Randomize(int startValue, string teamName)
         // ---------------------------------------------------------------------------------------
         {
-            BaseColor = Rng.RandomColor();
+            RGBColor clr = RGBColor.Random();
+            BaseColor.r = clr.R / 256.0f;
+            BaseColor.g = clr.G / 256.0f;
+            BaseColor.b = clr.B / 256.0f;
+
             AccentColor = new Color(1 - BaseColor.r, 1 - BaseColor.g, 1 - BaseColor.b);
 
 

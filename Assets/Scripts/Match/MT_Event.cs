@@ -10,11 +10,35 @@ using JLib.Sim;
 
 namespace Pit
 {
-    public class MT_RecordedEvent : GameEvent
+    public class MT_IDableEvent : SM_SimEvent
     {
+        public ulong Who;
+        public MT_IDableEvent(ulong who) { Who = who; }
+        public MT_IDableEvent() { }
     }
 
-    public class MT_MoveToEvent : MT_RecordedEvent
+    public class MT_TeamStartTurnEvent : MT_IDableEvent
+    {
+        public MT_TeamStartTurnEvent(ulong who) : base(who) { }
+    }
+    public class MT_TeamEndTurnEvent : MT_IDableEvent
+    {
+        public MT_TeamEndTurnEvent(ulong who) : base(who) { }
+    }
+
+
+
+    public class MT_SurrenderEvent : MT_IDableEvent
+    {
+        public MT_SurrenderEvent(ulong who) : base(who) { }
+    }
+
+    public class MT_VictoryEvent : MT_IDableEvent
+    {
+        public MT_VictoryEvent(ulong who) : base(who) { }
+    }
+
+    public class MT_MoveToEvent : SM_SimEvent
     {
         public SM_Pawn Who;
         public Vector3 Start;
@@ -22,8 +46,18 @@ namespace Pit
     }
 
     // TODO: put scores in here
-    public class MT_ScoreChangedEvent : MT_RecordedEvent
+    public class MT_ScoreChangedEvent : SM_SimEvent
     { }
 
+
+    /// <summary>
+    /// UI event?
+    /// </summary>
+    public class MT_SetCurrentCombatantEvent : SM_SimEvent
+    {
+        public MT_Combatant Who;
+        public MT_Team Team;
+    }
+ 
 
 }

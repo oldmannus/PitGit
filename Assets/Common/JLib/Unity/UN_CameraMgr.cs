@@ -28,7 +28,7 @@ namespace JLib.Unity
 
         List<UN_Camera>[] _cameras;
 
-        protected void Awake()
+        protected UN_CameraMgr()
         {
             _cameras = new List<UN_Camera>[(int)UN_Camera.TagType.Count];
             for (int i = 0; i < (int)UN_Camera.TagType.Count; i++)
@@ -39,22 +39,30 @@ namespace JLib.Unity
 
         int FindCameraNdx(UN_Camera cam)
         {
-            if (cam == null)
+            // cameras might be null if we're in an auto-start situation
+            if (cam == null || _cameras == null || _cameras[(int)cam.Tag] == null)
                 return -1;
             else
-                return _cameras[(int)cam.Tag].FindIndex((x) => x == cam);
+            {
+               return _cameras[(int)cam.Tag].FindIndex((x) => x == cam);
+            }
         }
 
         public void Register(UN_Camera cam)
         {
+            Dbg.Assert(cam != null);
+            Dbg.Assert(_cameras != null);
             Dbg.Assert(FindCameraNdx(cam) < 0);
             _cameras[(int)cam.Tag].Add(cam);
         }
 
         public void Unregister(UN_Camera cam)
         {
-            Dbg.Assert(FindCameraNdx(cam) >= 0);
-            _cameras[(int)cam.Tag].Remove(cam);
+            if (_cameras != null)
+            {
+                Dbg.Assert(FindCameraNdx(cam) >= 0);
+                _cameras[(int)cam.Tag].Remove(cam);
+            }
         }
 
         public UN_Camera FirstMainCamera()

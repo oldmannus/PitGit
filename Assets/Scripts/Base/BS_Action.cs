@@ -1,75 +1,139 @@
 ﻿using UnityEngine;
-using System;
-using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
-using System.Text;
+using System.Collections.Generic;
 using JLib.Utilities;
-using JLib.Sim;
-using JLib.Game;
+using System.Linq;
 
 namespace Pit
 {
-
-    // this is an action that sits on the player list of actions that they can take. 
-    public abstract class BS_Action : GM_Detailable
+    public abstract class BS_Action : BS_ActorComponent
     {
-        public BS_Combatant BaseCombatant { get; private set; }
-        public MT_Combatant Combatant { get; private set; }
-  
-        public enum Status
-        {
-            Available,      // active button, ready to do something
-            Unavailable,    // disabled button, can't be run
-            Hidden,         // don't even show the button, as we're in no way ready to do this (no mace attack with no mace for example)
-            Executing,
-            Interrupting,
-
-            Count
-        }
-
-        public enum Type
-        {
-            Standard,
-            Move,
-            Minor,
-            Quick,
-            Count
-        }
-
-        public enum Target
+        public enum ETargetType
         {
             None,   // no need to select a second target
             Point,  // select a point in the world
-            Pawn,   // select a pawn in the world
+            GameObject,   // select a pawn in the world
             Keyword,    // select an object with  given keyword in the world TODO: Implement this
         }
 
-        public BS_Action()
+
+        public  ETargetType TargetType;
+        public int APCost;
+        public Vector3 TargetPoint
         {
+            get
+            {
+                switch (TargetType)
+                {
+                    case ETargetType.Point:
+                        return _targetPoint;
+                    case ETargetType.GameObject:
+                        if (_targetObject != null)
+                            return _targetObject.transform.position;
+                        else
+                        {
+                            Dbg.Assert(false);
+                            return Vector3.zero;
+                        }
+                    default:
+                        Dbg.Assert(false);
+                        return Vector3.zero;
+                }
+            }
+        }
+                        
+        public GameObject TargetObject { get { Dbg.Assert(TargetType == ETargetType.GameObject); return _targetObject; } }
+        public GameObject Self { get; private set; }
+        public bool TargetSet { get; private set; }
+
+        GameObject _targetObject = null;
+        Vector3 _targetPoint;
+        bool _isRunning = false;
+//        BS_ActionConditional[] _conditions;
+        List<BS_ActionConditional> _conditions;
+        List<BS_ActionEffect> _effects;
+
+        public virtual void Awake()
+        {
+            _conditions = GetComponentsInChildren<BS_ActionConditional>(true).ToList();
+            _effects = GetComponentsInChildren<BS_ActionEffect>(true).ToList();
         }
 
         public virtual void Reset()
         {
-
+            _isRunning = false;
         }
 
-        public abstract Status GetStatus(MT_Combatant c);
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            _targetObject = null;
+            TargetSet = false;
+        }
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            _targetObject = null;
+            TargetSet = false;
+        }
 
-        public Target TargetType { get; protected set; }
+        public bool CanBeActivated()
+        {
+            return _isRunning == false && AreConditionsSatisfied();
+        }
 
+        public void ClearTarget()
+        {
+            _targetObject = null;
+            TargetSet = false;
+        }
 
-        public abstract IEnumerator Execute(MT_Combatant c);
+        public void SetTarget(GameObject target)
+        {
+            Dbg.Assert(target != null);
+            _targetObject = target;
+            TargetSet = true;
+        }
 
         public virtual void SetTarget(Vector3 v)
         {
-            Dbg.Assert(TargetType == Target.Point);
+            _targetPoint = v;
+            TargetSet = true;
         }
 
-        public virtual void SetTarget(SM_Pawn p)
+        public bool AreConditionsSatisfied()
         {
-            Dbg.Assert(TargetType == Target.Pawn || TargetType == Target.Keyword);
+            for (int i = 0; i < _conditions.Count; i++)
+            {
+                if (!_conditions[i].IsTrue())
+                    return false;
+            }
+            return true;
         }
 
+
+        public virtual void StartAction()
+        {
+            // TO DO: at some point in the future, add animation response, but for now, it just applies effects
+            Dbg.Assert(AreConditionsSatisfied());
+            Dbg.Assert(_isRunning == false);
+            
+            _isRunning = true;
+
+            foreach (var cond in _conditions)
+                cond.OnAction();
+
+            foreach (var eff in _effects)
+                eff.Apply();
+
+            EndAction();    // TO DO make this animation driven sometime
+        }
+        
+        // TO DO this will be tied with animations ending at some point
+        public virtual void EndAction()
+        {
+            _isRunning = false;
+        }
+        
     }
 }

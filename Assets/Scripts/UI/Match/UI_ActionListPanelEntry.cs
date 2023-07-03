@@ -16,8 +16,8 @@ namespace Pit
         [SerializeField]
         Text _number = null;
 
-        [SerializeField]
-        Button _button = null;
+//        [SerializeField]
+  //PJS TODO      Button _button = null;
 
         BS_Action _action;
         int _ndx;
@@ -34,14 +34,14 @@ namespace Pit
 
             if (_image != null)
             {
-                _image.sprite = act.Icon;
+            //###    _image.sprite = act.Icon;
             }
             // ### TODO : add icons!
         }
 
         public void OnClick()
         {
-            PT_Game.Match.StartAction(_action, _who);
+    // TO DO PJS        PT_Game.Match.StartAction(_action, _who);
         }
 
         /// <summary>

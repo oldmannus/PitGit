@@ -17,15 +17,16 @@ namespace Pit
     /// </summary>
     public class MT_Combatant
     {
-        public MT_Team      Team {  get { return _team; } }
-        public SM_Pawn      Pawn { get { return _pawn; } }
+        public MT_Team Team { get { return _team; } }
+        public SM_Pawn Pawn { get { return _pawn; } }
         public BS_Combatant Base { get { return _base; } }
+
+
+        public IVec3 GridPos { get; set; }
+        public int ActionPoints { get; private set; }
 
         public bool IsSelected { get { return _pawn.IsSelected; } }
         public bool IsOut { get; private set; }// has this guy been knocked out, seriously injured, dead, etc. Out forever
-
-
-
 
         MT_Team _team;
         BS_Combatant _base;
@@ -54,7 +55,9 @@ namespace Pit
             _pawn.SetName(Base.FullName);
             _pawn.SetGameParent(this);
 
-            // TO DO remove selection projector connecting in combatant.
+            // TODO remove selection projector connecting in combatant.
+
+            GridPos = PT_Game.Match.Arena.Grid.WorldToGrid(_pawn.transform.position);
 
             GameObject proj = GM_Game.Resources.InstantiateFromResource("CharacterModels/SelectionProjector", go.transform, Vector3.zero, Quaternion.identity);
             proj.transform.localPosition = Vector3.zero;
@@ -67,6 +70,11 @@ namespace Pit
             _base = null;
             _pawn = null;
             _team = null;
+        }
+
+        public void StartTurn()
+        {
+            ActionPoints = (int)Base.ActionPoints;
         }
     }
 }
