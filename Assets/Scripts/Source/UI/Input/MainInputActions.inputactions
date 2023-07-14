@@ -1,0 +1,82 @@
+{
+    "name": "MainInputActions",
+    "maps": [
+        {
+            "name": "Match_Main",
+            "id": "257d5dc3-b71b-46de-b159-e00e697ff33a",
+            "actions": [
+                {
+                    "name": "TogglePauseMenu",
+                    "type": "Button",
+                    "id": "90ada039-4411-44ae-800c-67932047d675",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShowInfo",
+                    "type": "Button",
+                    "id": "44009214-8d30-4aa2-8eee-e37ee999bfd0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f20ca153-4f5f-4a6d-b0fc-d21cb48e0c0f",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Game pad",
+                    "action": "TogglePauseMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8fb96b7-fac3-440b-804a-b3de99c138e8",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Game pad",
+                    "action": "ShowInfo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Mouse and keyboard",
+            "bindingGroup": "Mouse and keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Game pad",
+            "bindingGroup": "Game pad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
